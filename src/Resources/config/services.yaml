@@ -1,0 +1,30 @@
+services:
+  Dbp\Relay\CourseBundle\Command\TestCommand:
+    autowire: true
+    autoconfigure: true
+
+  Dbp\Relay\CourseBundle\Controller\:
+    resource: '../../Controller'
+    autoconfigure: true
+    autowire: true
+
+  Dbp\Relay\CourseBundle\DataPersister\:
+    resource: '../../DataPersister'
+    autowire: true
+    autoconfigure: true
+
+  Dbp\Relay\CourseBundle\DataProvider\:
+    resource: '../../DataProvider'
+    autowire: true
+    autoconfigure: true
+
+  Dbp\Relay\CourseBundle\Service\ExternalApi:
+    autowire: true
+    autoconfigure: true
+
+  Dbp\Relay\CourseBundle\Service\MyCustomService:
+    autowire: true
+    autoconfigure: true
+
+  Dbp\Relay\CourseBundle\Service\CourseProviderInterface:
+    '@Dbp\Relay\CourseBundle\Service\ExternalApi'
