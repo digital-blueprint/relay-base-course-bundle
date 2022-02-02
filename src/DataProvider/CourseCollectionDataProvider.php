@@ -7,8 +7,8 @@ namespace Dbp\Relay\CourseBundle\DataProvider;
 use ApiPlatform\Core\DataProvider\CollectionDataProviderInterface;
 use ApiPlatform\Core\DataProvider\RestrictedDataProviderInterface;
 use Dbp\Relay\CoreBundle\Helpers\ArrayFullPaginator;
+use Dbp\Relay\CourseBundle\API\CourseProviderInterface;
 use Dbp\Relay\CourseBundle\Entity\Course;
-use Dbp\Relay\CourseBundle\Service\CourseProviderInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 final class CourseCollectionDataProvider extends AbstractController implements CollectionDataProviderInterface, RestrictedDataProviderInterface

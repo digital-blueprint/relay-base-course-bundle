@@ -6,8 +6,8 @@ namespace Dbp\Relay\CourseBundle\DataProvider;
 
 use ApiPlatform\Core\DataProvider\ItemDataProviderInterface;
 use ApiPlatform\Core\DataProvider\RestrictedDataProviderInterface;
+use Dbp\Relay\CourseBundle\API\CourseProviderInterface;
 use Dbp\Relay\CourseBundle\Entity\Course;
-use Dbp\Relay\CourseBundle\Service\CourseProviderInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 final class CourseItemDataProvider extends AbstractController implements ItemDataProviderInterface, RestrictedDataProviderInterface

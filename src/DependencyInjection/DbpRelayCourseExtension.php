@@ -21,10 +21,6 @@ class DbpRelayCourseExtension extends ConfigurableExtension
             new FileLocator(__DIR__.'/../Resources/config')
         );
         $loader->load('services.yaml');
-
-        // Inject the config value into the MyCustomService service
-        $definition = $container->getDefinition('Dbp\Relay\CourseBundle\Service\MyCustomService');
-        $definition->addArgument($mergedConfig['example_config']);
     }
 
     private function extendArrayParameter(ContainerBuilder $container, string $parameter, array $values)

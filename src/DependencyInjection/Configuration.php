@@ -11,15 +11,6 @@ class Configuration implements ConfigurationInterface
 {
     public function getConfigTreeBuilder(): TreeBuilder
     {
-        $treeBuilder = new TreeBuilder('dbp_relay_course');
-
-        $treeBuilder->getRootNode()
-            ->children()
-                ->scalarNode('example_config')
-                    ->defaultValue('42')
-                ->end()
-            ->end();
-
-        return $treeBuilder;
+        return new TreeBuilder('dbp_relay_course');
     }
 }

@@ -6,59 +6,61 @@ namespace Dbp\Relay\CourseBundle\Entity;
 
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
-use Dbp\Relay\CourseBundle\Controller\LoggedInOnly;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ApiResource(
  *     collectionOperations={
  *         "get" = {
- *             "path" = "/course/courses",
  *             "openapi_context" = {
- *                 "tags" = {"Course API"},
+ *                 "tags" = {"Courses"},
+ *                 "parameters" = {
+ *                     {"name" = "lang", "in" = "query", "description" = "Language of result", "type" = "string", "enum" = {"de", "en"}, "example" = "de"}
+ *                 }
+ *             }
+ *         },
+ *         "get_byorganization" = {
+ *             "method" = "GET",
+ *             "path" = "/base/organizations/{id}/courses",
+ *             "controller" = GetCoursesByOrganization::class,
+ *             "read" = false,
+ *             "openapi_context" = {
+ *                 "tags" = {"Courses"},
+ *                 "summary" = "Get the Courses related to an organization.",
+ *                 "parameters" = {
+ *                     {"name" = "lang", "in" = "query", "description" = "Language of result", "type" = "string", "enum" = {"de", "en"}, "example" = "de"},
+ *                     {"name" = "id", "in" = "path", "description" = "Id of Organization", "required" = true, "type" = "string", "example" = "123456"}
+ *                 }
  *             },
- *         }
+ *         },
+ *         "get_byperson" = {
+ *             "method" = "GET",
+ *             "path" = "/base/people/{id}/courses",
+ *             "controller" = GetCoursesByPerson::class,
+ *             "read" = false,
+ *             "openapi_context" = {
+ *                 "tags" = {"Courses"},
+ *                 "summary" = "Get the Courses related to a person.",
+ *                 "parameters" = {
+ *                     {"name" = "lang", "in" = "query", "description" = "Language of result", "type" = "string", "enum" = {"de", "en"}, "example" = "de"},
+ *                     {"name" = "id", "in" = "path", "description" = "Id of Organization", "required" = true, "type" = "string", "example" = "123456"}
+ *                 }
+ *             },
+ *         },
  *     },
  *     itemOperations={
  *         "get" = {
- *             "path" = "/course/courses/{identifier}",
  *             "openapi_context" = {
- *                 "tags" = {"Course API"},
- *             },
- *         },
- *         "put" = {
- *             "path" = "/course/courses/{identifier}",
- *             "openapi_context" = {
- *                 "tags" = {"Course API"},
- *             },
- *         },
- *         "delete" = {
- *             "path" = "/course/courses/{identifier}",
- *             "openapi_context" = {
- *                 "tags" = {"Course API"},
- *             },
- *         },
- *         "loggedin_only" = {
- *             "security" = "is_granted('IS_AUTHENTICATED_FULLY')",
- *             "method" = "GET",
- *             "path" = "/course/courses/{identifier}/loggedin-only",
- *             "controller" = LoggedInOnly::class,
- *             "openapi_context" = {
- *                 "summary" = "Only works when logged in.",
- *                 "tags" = {"Course API"},
- *             },
+ *                 "tags" = {"Courses"},
+ *                 "parameters" = {
+ *                     {"name" = "lang", "in" = "query", "description" = "Language of result", "type" = "string", "enum" = {"de", "en"}, "example" = "de"}
+ *                 }
+ *             }
  *         }
  *     },
  *     iri="https://schema.org/Course",
- *     shortName="CourseCourse",
- *     normalizationContext={
- *         "groups" = {"CourseCourse:output"},
- *         "jsonld_embed_context" = true
- *     },
- *     denormalizationContext={
- *         "groups" = {"CourseCourse:input"},
- *         "jsonld_embed_context" = true
- *     }
+ *     normalizationContext={"groups" = {"Course:output"}, "jsonld_embed_context" = true},
+ *     denormalizationContext={"groups" = {"Course:input"}, "jsonld_embed_context" = true}
  * )
  */
 class Course
@@ -70,11 +72,37 @@ class Course
 
     /**
      * @ApiProperty(iri="https://schema.org/name")
-     * @Groups({"CourseCourse:output", "CourseCourse:input"})
+     * @Groups({"Course:output"})
      *
      * @var string
      */
     private $name;
+
+    /**
+     * @ApiProperty
+     * @Groups({"Course:output"})
+     *
+     * @var string
+     */
+    private $type;
+
+    /**
+     * @ApiProperty(iri="https://schema.org/description")
+     * @Groups({"Course:output"})
+     *
+     * @var string
+     */
+    private $description;
+
+    public function getIdentifier(): string
+    {
+        return $this->identifier;
+    }
+
+    public function setIdentifier(string $identifier): void
+    {
+        $this->identifier = $identifier;
+    }
 
     public function getName(): string
     {
@@ -86,13 +114,23 @@ class Course
         $this->name = $name;
     }
 
-    public function getIdentifier(): string
+    public function getType(): string
     {
-        return $this->identifier;
+        return $this->type;
     }
 
-    public function setIdentifier(string $identifier): void
+    public function setType(string $type): void
     {
-        $this->identifier = $identifier;
+        $this->type = $type;
+    }
+
+    public function getDescription(): string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): void
+    {
+        $this->description = $description;
     }
 }
