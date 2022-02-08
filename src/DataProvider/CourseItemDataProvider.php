@@ -26,6 +26,11 @@ final class CourseItemDataProvider extends AbstractController implements ItemDat
 
     public function getItem(string $resourceClass, $id, string $operationName = null, array $context = []): ?Course
     {
-        return $this->api->getCourseById($id);
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        $filters = $context['filters'] ?? [];
+        $options = ['lang' => $filters['lang'] ?? 'de'];
+
+        return $this->api->getCourseById($id, $options);
     }
 }

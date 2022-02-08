@@ -9,32 +9,17 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ApiTest extends ApiTestCase
 {
-    public function testBasics()
+    public function testCoursesNoAuth()
     {
         $client = self::createClient();
-        $response = $client->request('GET', '/course/courses');
-        $this->assertSame(Response::HTTP_OK, $response->getStatusCode());
-
-        $response = $client->request('GET', '/course/courses/graz');
-        $this->assertSame(Response::HTTP_OK, $response->getStatusCode());
-
-        $response = $client->request('DELETE', '/course/courses/graz');
-        $this->assertSame(Response::HTTP_NO_CONTENT, $response->getStatusCode());
-
-        $response = $client->request('PUT', '/course/courses/graz', [
-            'headers' => [
-                'Content-Type' => 'application/json',
-            ],
-            'body' => json_encode(['name' => 'foo']),
-        ]);
-        $this->assertSame(Response::HTTP_OK, $response->getStatusCode());
-        $this->assertSame('foo', json_decode($response->getContent(), true)['name']);
+        $response = $client->request('GET', '/courses');
+        $this->assertSame(Response::HTTP_UNAUTHORIZED, $response->getStatusCode());
     }
 
-    public function testNoAuth()
+    public function testCourseNoAuth()
     {
         $client = self::createClient();
-        $response = $client->request('GET', '/course/courses/graz/loggedin-only');
+        $response = $client->request('GET', '/courses/123');
         $this->assertSame(Response::HTTP_UNAUTHORIZED, $response->getStatusCode());
     }
 }

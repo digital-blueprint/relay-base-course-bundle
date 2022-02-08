@@ -27,11 +27,7 @@ class GetCoursesByOrganization extends AbstractController
 
         $page = (int) $request->query->get('page', 1);
         $perPage = (int) $request->query->get('perPage', self::ITEMS_PER_PAGE);
-
-        $options = [];
-        if ($request->query->has('lang')) {
-            $options['lang'] = (string) $request->query->get('lang');
-        }
+        $options = ['lang' => $request->query->get('lang', 'de')];
 
         $courses = $this->coursesProvider->getCoursesByOrganization($id, $options);
 

@@ -6,6 +6,7 @@ namespace Dbp\Relay\CourseBundle\Entity;
 
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
+use Dbp\Relay\CourseBundle\Controller\GetCoursesByOrganization;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
@@ -27,20 +28,6 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *             "openapi_context" = {
  *                 "tags" = {"Courses"},
  *                 "summary" = "Get the Courses related to an organization.",
- *                 "parameters" = {
- *                     {"name" = "lang", "in" = "query", "description" = "Language of result", "type" = "string", "enum" = {"de", "en"}, "example" = "de"},
- *                     {"name" = "id", "in" = "path", "description" = "Id of Organization", "required" = true, "type" = "string", "example" = "123456"}
- *                 }
- *             },
- *         },
- *         "get_byperson" = {
- *             "method" = "GET",
- *             "path" = "/base/people/{id}/courses",
- *             "controller" = GetCoursesByPerson::class,
- *             "read" = false,
- *             "openapi_context" = {
- *                 "tags" = {"Courses"},
- *                 "summary" = "Get the Courses related to a person.",
  *                 "parameters" = {
  *                     {"name" = "lang", "in" = "query", "description" = "Language of result", "type" = "string", "enum" = {"de", "en"}, "example" = "de"},
  *                     {"name" = "id", "in" = "path", "description" = "Id of Organization", "required" = true, "type" = "string", "example" = "123456"}

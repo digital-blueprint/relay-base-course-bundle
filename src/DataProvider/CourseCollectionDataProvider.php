@@ -27,17 +27,21 @@ final class CourseCollectionDataProvider extends AbstractController implements C
 
     public function getCollection(string $resourceClass, string $operationName = null, array $context = []): ArrayFullPaginator
     {
-        $perPage = 30;
-        $page = 1;
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
         $filters = $context['filters'] ?? [];
+        $options = ['lang' => $filters['lang'] ?? 'de'];
+
+        $page = 1;
         if (isset($filters['page'])) {
             $page = (int) $filters['page'];
         }
+
+        $perPage = 30;
         if (isset($filters['perPage'])) {
             $perPage = (int) $filters['perPage'];
         }
 
-        return new ArrayFullPaginator($this->api->getCourses(), $page, $perPage);
+        return new ArrayFullPaginator($this->api->getCourses($options), $page, $perPage);
     }
 }
