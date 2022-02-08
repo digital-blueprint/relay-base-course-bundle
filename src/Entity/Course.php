@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Dbp\Relay\CourseBundle\Entity;
 
-use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Dbp\Relay\CourseBundle\Controller\GetCoursesByOrganization;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -47,77 +46,9 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *     },
  *     iri="https://schema.org/Course",
  *     normalizationContext={"groups" = {"Course:output"}, "jsonld_embed_context" = true},
- *     denormalizationContext={"groups" = {"Course:input"}, "jsonld_embed_context" = true}
  * )
  */
-class Course
+class Course implements CourseInterface
 {
-    /**
-     * @ApiProperty(identifier=true)
-     */
-    private $identifier;
-
-    /**
-     * @ApiProperty(iri="https://schema.org/name")
-     * @Groups({"Course:output"})
-     *
-     * @var string
-     */
-    private $name;
-
-    /**
-     * @ApiProperty
-     * @Groups({"Course:output"})
-     *
-     * @var string
-     */
-    private $type;
-
-    /**
-     * @ApiProperty(iri="https://schema.org/description")
-     * @Groups({"Course:output"})
-     *
-     * @var string
-     */
-    private $description;
-
-    public function getIdentifier(): string
-    {
-        return $this->identifier;
-    }
-
-    public function setIdentifier(string $identifier): void
-    {
-        $this->identifier = $identifier;
-    }
-
-    public function getName(): string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): void
-    {
-        $this->name = $name;
-    }
-
-    public function getType(): string
-    {
-        return $this->type;
-    }
-
-    public function setType(string $type): void
-    {
-        $this->type = $type;
-    }
-
-    public function getDescription(): string
-    {
-        return $this->description;
-    }
-
-    public function setDescription(string $description): void
-    {
-        $this->description = $description;
-    }
+    use CourseTrait;
 }
