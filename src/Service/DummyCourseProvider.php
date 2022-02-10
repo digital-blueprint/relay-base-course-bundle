@@ -6,6 +6,7 @@ namespace Dbp\Relay\CourseBundle\Service;
 
 use Dbp\Relay\CourseBundle\API\CourseProviderInterface;
 use Dbp\Relay\CourseBundle\Entity\Course;
+use Dbp\Relay\CourseBundle\Entity\CourseAttendee;
 
 class DummyCourseProvider implements CourseProviderInterface
 {
@@ -30,5 +31,16 @@ class DummyCourseProvider implements CourseProviderInterface
     public function getCoursesByOrganization(string $orgUnitId, array $options = []): array
     {
         return $this->getCourses($options);
+    }
+
+    public function getAttendeesByCourse(string $courseId, array $options = []): array
+    {
+        $attendee = new CourseAttendee();
+        $attendee->setIdentifier('aeinstein');
+        $attendee->setGivenName('Albert');
+        $attendee->setFamilyName('Einstein');
+        $attendee->setEmail('info@einstein.com');
+
+        return [$attendee];
     }
 }
