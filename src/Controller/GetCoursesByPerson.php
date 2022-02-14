@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace Dbp\Relay\CourseBundle\Controller;
 
+use ApiPlatform\Core\DataProvider\PaginatorInterface;
 use Dbp\Relay\CoreBundle\Helpers\ArrayFullPaginator;
 use Dbp\Relay\CourseBundle\API\CourseProviderInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 
-class GetAttendeesByCourse extends AbstractController
+class GetCoursesByPerson extends AbstractController
 {
     public const ITEMS_PER_PAGE = 250;
 
@@ -20,7 +21,7 @@ class GetAttendeesByCourse extends AbstractController
         $this->coursesProvider = $coursesProvider;
     }
 
-    public function __invoke(string $identifier, Request $request): ArrayFullPaginator
+    public function __invoke(string $identifier, Request $request): PaginatorInterface
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
@@ -31,7 +32,12 @@ class GetAttendeesByCourse extends AbstractController
         $lang = $request->query->get('lang', 'de');
         $options['lang'] = $lang;
 
-        $courses = $this->coursesProvider->getAttendeesByCourse($identifier, $options);
+        $term = $request->query->get('term');
+        if ($term !== null) {
+            $options['term'] = $term;
+        }
+
+        $courses = $this->coursesProvider->getCoursesByPerson($identifier, $options);
 
         return new ArrayFullPaginator($courses, $page, $perPage);
     }

@@ -22,6 +22,11 @@ interface CourseProviderInterface
     public function getCoursesByOrganization(string $orgUnitId, array $options = []): array;
 
     /**
+     * @return Course[]
+     */
+    public function getCoursesByPerson(string $personId, array $options = []): array;
+
+    /**
      * @return CourseAttendee[]
      */
     public function getAttendeesByCourse(string $courseId, array $options = []): array;

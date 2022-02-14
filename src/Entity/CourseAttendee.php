@@ -5,15 +5,16 @@ declare(strict_types=1);
 namespace Dbp\Relay\CourseBundle\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
-use Dbp\Relay\BasePersonBundle\Controller\GetAtteendeesByCourse;
 use Dbp\Relay\BasePersonBundle\Entity\PersonInterface;
 use Dbp\Relay\BasePersonBundle\Entity\PersonTrait;
+use Dbp\Relay\CourseBundle\Controller\GetAttendeesByCourse;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ApiResource(
  *     collectionOperations={
  *         "get" = {
+ *             "path" = "/course_attendees",
  *             "openapi_context" = {
  *                 "tags" = {"Courses"}
  *             }
@@ -21,7 +22,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *         "get_bycourse" = {
  *             "method" = "GET",
  *             "path" = "/courses/{identifier}/attendees",
- *             "controller" = GetAtteendeesByCourse::class,
+ *             "controller" = GetAttendeesByCourse::class,
  *             "read" = false,
  *             "normalization_context" = {
  *                 "jsonld_embed_context" = true,
@@ -39,14 +40,15 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *     },
  *     itemOperations={
  *         "get" = {
+ *             "path" = "/course_attendees/{identifier}",
  *             "openapi_context" = {
  *                 "tags" = {"Courses"}
  *             }
  *         }
  *     },
  *     iri="http://schema.org/Person",
- *     shortName="BasePerson",
- *     description="A person of the LDAP system",
+ *     shortName="CourseAttendee",
+ *     description="A person attending a course",
  *     normalizationContext={
  *         "groups" = {"BasePerson:output"},
  *         "jsonld_embed_context" = true,

@@ -43,4 +43,9 @@ class DummyCourseProvider implements CourseProviderInterface
 
         return [$attendee];
     }
+
+    public function getCoursesByPerson(string $personId, array $options = []): array
+    {
+        return $this->getCourses($options);
+    }
 }

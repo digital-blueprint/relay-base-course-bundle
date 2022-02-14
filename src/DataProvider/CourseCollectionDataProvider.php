@@ -32,6 +32,11 @@ final class CourseCollectionDataProvider extends AbstractController implements C
         $filters = $context['filters'] ?? [];
         $options = ['lang' => $filters['lang'] ?? 'de'];
 
+        $term = $filters['term'] ?? null;
+        if ($term !== null) {
+            $options['term'] = $term;
+        }
+
         $page = 1;
         if (isset($filters['page'])) {
             $page = (int) $filters['page'];
