@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Dbp\Relay\CourseBundle\DataProvider;
+namespace Dbp\Relay\BaseCourseBundle\DataProvider;
 
 use ApiPlatform\Core\DataProvider\ItemDataProviderInterface;
 use ApiPlatform\Core\DataProvider\RestrictedDataProviderInterface;
-use Dbp\Relay\CourseBundle\API\CourseProviderInterface;
-use Dbp\Relay\CourseBundle\Entity\Course;
+use Dbp\Relay\BaseCourseBundle\API\CourseProviderInterface;
+use Dbp\Relay\BaseCourseBundle\Entity\Course;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 final class CourseItemDataProvider extends AbstractController implements ItemDataProviderInterface, RestrictedDataProviderInterface

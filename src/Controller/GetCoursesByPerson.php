@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Dbp\Relay\CourseBundle\Controller;
+namespace Dbp\Relay\BaseCourseBundle\Controller;
 
 use ApiPlatform\Core\DataProvider\PaginatorInterface;
+use Dbp\Relay\BaseCourseBundle\API\CourseProviderInterface;
 use Dbp\Relay\CoreBundle\Helpers\ArrayFullPaginator;
-use Dbp\Relay\CourseBundle\API\CourseProviderInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 

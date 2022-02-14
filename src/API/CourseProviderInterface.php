@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Dbp\Relay\CourseBundle\API;
+namespace Dbp\Relay\BaseCourseBundle\API;
 
-use Dbp\Relay\CourseBundle\Entity\Course;
-use Dbp\Relay\CourseBundle\Entity\CourseAttendee;
+use Dbp\Relay\BaseCourseBundle\Entity\Course;
+use Dbp\Relay\BaseCourseBundle\Entity\CourseAttendee;
 
 interface CourseProviderInterface
 {

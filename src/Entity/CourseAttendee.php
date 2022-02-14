@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Dbp\Relay\CourseBundle\Entity;
+namespace Dbp\Relay\BaseCourseBundle\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use Dbp\Relay\BaseCourseBundle\Controller\GetAttendeesByCourse;
 use Dbp\Relay\BasePersonBundle\Entity\PersonInterface;
 use Dbp\Relay\BasePersonBundle\Entity\PersonTrait;
-use Dbp\Relay\CourseBundle\Controller\GetAttendeesByCourse;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**

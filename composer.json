@@ -29,12 +29,12 @@
     ],
     "autoload": {
         "psr-4": {
-            "Dbp\\Relay\\CourseBundle\\": "src/"
+            "Dbp\\Relay\\BaseCourseBundle\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Dbp\\Relay\\CourseBundle\\Tests\\": "tests/"
+            "Dbp\\Relay\\BaseCourseBundle\\Tests\\": "tests/"
         }
     },
     "config": {

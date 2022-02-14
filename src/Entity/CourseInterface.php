@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Dbp\Relay\CourseBundle\Entity;
+namespace Dbp\Relay\BaseCourseBundle\Entity;
 
 interface CourseInterface
 {

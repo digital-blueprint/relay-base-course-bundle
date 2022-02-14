@@ -1,17 +1,17 @@
 services:
-  Dbp\Relay\CourseBundle\Controller\:
+  Dbp\Relay\BaseCourseBundle\Controller\:
     resource: '../../Controller'
     autoconfigure: true
     autowire: true
 
-  Dbp\Relay\CourseBundle\DataProvider\:
+  Dbp\Relay\BaseCourseBundle\DataProvider\:
     resource: '../../DataProvider'
     autowire: true
     autoconfigure: true
 
-  Dbp\Relay\CourseBundle\Service\DummyCourseProvider:
+  Dbp\Relay\BaseCourseBundle\Service\DummyCourseProvider:
     autowire: true
     autoconfigure: true
 
-  Dbp\Relay\CourseBundle\API\CourseProviderInterface:
-    '@Dbp\Relay\CourseBundle\Service\DummyCourseProvider'
+  Dbp\Relay\BaseCourseBundle\API\CourseProviderInterface:
+    '@Dbp\Relay\BaseCourseBundle\Service\DummyCourseProvider'

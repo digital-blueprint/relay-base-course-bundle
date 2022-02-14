@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Dbp\Relay\CourseBundle\Entity;
+namespace Dbp\Relay\BaseCourseBundle\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
-use Dbp\Relay\CourseBundle\Controller\GetCoursesByOrganization;
-use Dbp\Relay\CourseBundle\Controller\GetCoursesByPerson;
+use Dbp\Relay\BaseCourseBundle\Controller\GetCoursesByOrganization;
+use Dbp\Relay\BaseCourseBundle\Controller\GetCoursesByPerson;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
