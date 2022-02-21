@@ -15,6 +15,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *     collectionOperations={
  *         "get" = {
  *             "path" = "/course_attendees",
+ *             "security" = "is_granted('IS_AUTHENTICATED_FULLY')",
  *             "openapi_context" = {
  *                 "tags" = {"Courses"}
  *             }
@@ -41,6 +42,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *     itemOperations={
  *         "get" = {
  *             "path" = "/course_attendees/{identifier}",
+ *             "security" = "is_granted('IS_AUTHENTICATED_FULLY')",
  *             "openapi_context" = {
  *                 "tags" = {"Courses"}
  *             }
