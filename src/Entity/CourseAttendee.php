@@ -23,6 +23,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *         "get_bycourse" = {
  *             "method" = "GET",
  *             "path" = "/base/courses/{identifier}/attendees",
+ *             "security" = "is_granted('IS_AUTHENTICATED_FULLY')",
  *             "controller" = GetAttendeesByCourse::class,
  *             "read" = false,
  *             "normalization_context" = {

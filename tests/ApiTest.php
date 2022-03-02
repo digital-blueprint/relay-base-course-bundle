@@ -12,14 +12,35 @@ class ApiTest extends ApiTestCase
     public function testCoursesNoAuth()
     {
         $client = self::createClient();
-        $response = $client->request('GET', '/courses');
+        $response = $client->request('GET', '/base/courses');
         $this->assertSame(Response::HTTP_UNAUTHORIZED, $response->getStatusCode());
     }
 
     public function testCourseNoAuth()
     {
         $client = self::createClient();
-        $response = $client->request('GET', '/courses/123');
+        $response = $client->request('GET', '/base/courses/123');
+        $this->assertSame(Response::HTTP_UNAUTHORIZED, $response->getStatusCode());
+    }
+
+    public function testAttendeesByCourseNoAuth()
+    {
+        $client = self::createClient();
+        $response = $client->request('GET', '/base/courses/123/attendees');
+        $this->assertSame(Response::HTTP_UNAUTHORIZED, $response->getStatusCode());
+    }
+
+    public function testCoursesByOrganizationNoAuth()
+    {
+        $client = self::createClient();
+        $response = $client->request('GET', '/base/organizations/123/courses');
+        $this->assertSame(Response::HTTP_UNAUTHORIZED, $response->getStatusCode());
+    }
+
+    public function testCoursesByPersonNoAuth()
+    {
+        $client = self::createClient();
+        $response = $client->request('GET', '/base/people/123/courses');
         $this->assertSame(Response::HTTP_UNAUTHORIZED, $response->getStatusCode());
     }
 }
