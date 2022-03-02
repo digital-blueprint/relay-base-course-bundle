@@ -22,7 +22,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *         },
  *         "get_bycourse" = {
  *             "method" = "GET",
- *             "path" = "/courses/{identifier}/attendees",
+ *             "path" = "/base/courses/{identifier}/attendees",
  *             "controller" = GetAttendeesByCourse::class,
  *             "read" = false,
  *             "normalization_context" = {

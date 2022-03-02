@@ -13,6 +13,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * @ApiResource(
  *     collectionOperations={
  *         "get" = {
+ *             "path" = "/base/courses",
  *             "openapi_context" = {
  *                 "tags" = {"Courses"},
  *                 "parameters" = {
@@ -54,9 +55,11 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *     },
  *     itemOperations={
  *         "get" = {
+ *             "path" = "/base/courses/{identifier}",
  *             "openapi_context" = {
  *                 "tags" = {"Courses"},
  *                 "parameters" = {
+ *                     {"name" = "identifier", "in" = "path", "description" = "Id of course", "required" = true, "type" = "string", "example" = "257571"},
  *                     {"name" = "lang", "in" = "query", "description" = "Language of result", "type" = "string", "enum" = {"de", "en"}, "example" = "de"}
  *                 }
  *             }
