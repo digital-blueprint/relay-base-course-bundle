@@ -17,7 +17,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *             "path" = "/course_attendees",
  *             "security" = "is_granted('IS_AUTHENTICATED_FULLY')",
  *             "openapi_context" = {
- *                 "tags" = {"Courses"}
+ *                 "tags" = {"BaseCourse"}
  *             }
  *         },
  *         "get_bycourse" = {
@@ -31,7 +31,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *                 "groups" = {"BasePerson:output"}
  *             },
  *             "openapi_context" = {
- *                 "tags" = {"Courses"},
+ *                 "tags" = {"BaseCourse"},
  *                 "summary" = "Get the attendees of a course.",
  *                 "parameters" = {
  *                     {"name" = "identifier", "in" = "path", "description" = "Id of course", "required" = true, "type" = "string", "example" = "123456"},
@@ -45,7 +45,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *             "path" = "/course_attendees/{identifier}",
  *             "security" = "is_granted('IS_AUTHENTICATED_FULLY')",
  *             "openapi_context" = {
- *                 "tags" = {"Courses"}
+ *                 "tags" = {"BaseCourse"}
  *             }
  *         }
  *     },

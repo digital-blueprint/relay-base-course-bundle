@@ -15,7 +15,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *         "get" = {
  *             "path" = "/base/courses",
  *             "openapi_context" = {
- *                 "tags" = {"Courses"},
+ *                 "tags" = {"BaseCourse"},
  *                 "parameters" = {
  *                     {"name" = "lang", "in" = "query", "description" = "Language of result", "type" = "string", "enum" = {"de", "en"}, "example" = "de"},
  *                     {"name" = "term", "in" = "query", "description" = "Teaching term", "type" = "string", "enum" = {"W", "S"}, "example" = "W"},
@@ -28,7 +28,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *             "controller" = GetCoursesByOrganization::class,
  *             "read" = false,
  *             "openapi_context" = {
- *                 "tags" = {"Courses"},
+ *                 "tags" = {"BaseCourse"},
  *                 "summary" = "Get the Courses related to an organization.",
  *                 "parameters" = {
  *                     {"name" = "lang", "in" = "query", "description" = "Language of result", "type" = "string", "enum" = {"de", "en"}, "example" = "de"},
@@ -43,7 +43,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *             "controller" = GetCoursesByPerson::class,
  *             "read" = false,
  *             "openapi_context" = {
- *                 "tags" = {"Courses"},
+ *                 "tags" = {"BaseCourse"},
  *                 "summary" = "Get the Courses related to a person.",
  *                 "parameters" = {
  *                     {"name" = "lang", "in" = "query", "description" = "Language of result", "type" = "string", "enum" = {"de", "en"}, "example" = "de"},
@@ -57,7 +57,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *         "get" = {
  *             "path" = "/base/courses/{identifier}",
  *             "openapi_context" = {
- *                 "tags" = {"Courses"},
+ *                 "tags" = {"BaseCourse"},
  *                 "parameters" = {
  *                     {"name" = "identifier", "in" = "path", "description" = "Id of course", "required" = true, "type" = "string", "example" = "257571"},
  *                     {"name" = "lang", "in" = "query", "description" = "Language of result", "type" = "string", "enum" = {"de", "en"}, "example" = "de"}
@@ -66,7 +66,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *         }
  *     },
  *     iri="https://schema.org/Course",
- *     normalizationContext={"groups" = {"Course:output"}, "jsonld_embed_context" = true},
+ *     normalizationContext={"groups" = {"BaseCourse:output"}, "jsonld_embed_context" = true},
  * )
  */
 class Course implements CourseInterface
