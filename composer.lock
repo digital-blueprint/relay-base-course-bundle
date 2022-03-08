@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7211b8b5c0a91436031cb216d95cbea6",
+    "content-hash": "0df1de6656e47e39e70adb1f054ff0ab",
     "packages": [
         {
             "name": "api-platform/core",
@@ -169,17 +169,11 @@
         },
         {
             "name": "dbp/relay-base-person-bundle",
-            "version": "dev-main",
+            "version": "v0.1.6",
             "source": {
                 "type": "git",
-                "url": "https://gitlab.tugraz.at/dbp/relay/dbp-relay-base-person-bundle.git",
-                "reference": "003581b370018bb13a67d2d9a28fc21d914569f6"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://gitlab.tugraz.at/api/v4/projects/dbp%2Frelay%2Fdbp-relay-base-person-bundle/repository/archive.zip?sha=003581b370018bb13a67d2d9a28fc21d914569f6",
-                "reference": "003581b370018bb13a67d2d9a28fc21d914569f6",
-                "shasum": ""
+                "url": "git@gitlab.tugraz.at:dbp/relay/dbp-relay-base-person-bundle.git",
+                "reference": "aaae7b2cb9e6fbb22c116b777fde800312ad10ea"
             },
             "require": {
                 "api-platform/core": "^2.6.3",
@@ -210,7 +204,6 @@
                 "symfony/phpunit-bridge": "^5.2",
                 "vimeo/psalm": "^4.4"
             },
-            "default-branch": true,
             "type": "symfony-bundle",
             "autoload": {
                 "psr-4": {
@@ -250,11 +243,7 @@
             "license": [
                 "AGPL-3.0-or-later"
             ],
-            "support": {
-                "source": "https://gitlab.tugraz.at/dbp/relay/dbp-relay-base-person-bundle/-/tree/main",
-                "issues": "https://gitlab.tugraz.at/dbp/relay/dbp-relay-base-person-bundle/-/issues"
-            },
-            "time": "2022-02-28T01:23:32+01:00"
+            "time": "2022-02-02T15:46:45+00:00"
         },
         {
             "name": "dbp/relay-core-bundle",
@@ -10087,9 +10076,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "dbp/relay-base-person-bundle": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

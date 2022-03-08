@@ -16,7 +16,7 @@ trait CourseTrait
 
     /**
      * @ApiProperty(iri="https://schema.org/name")
-     * @Groups({"Course:output"})
+     * @Groups({"BaseCourse:output"})
      *
      * @var string
      */
@@ -24,7 +24,7 @@ trait CourseTrait
 
     /**
      * @ApiProperty
-     * @Groups({"Course:output"})
+     * @Groups({"BaseCourse:output"})
      *
      * @var string
      */
@@ -32,11 +32,19 @@ trait CourseTrait
 
     /**
      * @ApiProperty(iri="https://schema.org/description")
-     * @Groups({"Course:output"})
+     * @Groups({"BaseCourse:output"})
      *
      * @var string
      */
     private $description;
+
+    /**
+     * @ApiProperty(iri="https://schema.org/additionalProperty")
+     * @Groups({"BaseCourse:output"})
+     *
+     * @var array
+     */
+    private $localData;
 
     public function getIdentifier(): string
     {
@@ -76,5 +84,25 @@ trait CourseTrait
     public function setDescription(string $description): void
     {
         $this->description = $description;
+    }
+
+    /**
+     * Allows attaching local data to a Course object.
+     *
+     * @param ?mixed $value
+     */
+    public function setLocalData(string $key, $value): void
+    {
+        $this->localData[$key] = $value;
+    }
+
+    /**
+     * Gets local data from a Course object.
+     *
+     * @return ?mixed
+     */
+    public function getLocalData(string $key)
+    {
+        return $this->localData[$key] ?? null;
     }
 }
