@@ -6,6 +6,7 @@ namespace Dbp\Relay\BaseCourseBundle\Entity;
 
 use ApiPlatform\Core\Annotation\ApiProperty;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Annotation\Ignore;
 
 trait CourseTrait
 {
@@ -86,23 +87,32 @@ trait CourseTrait
         $this->description = $description;
     }
 
+    public function getLocalData(): array
+    {
+        return $this->localData;
+    }
+
     /**
      * Allows attaching local data to a Course object.
      *
      * @param ?mixed $value
      */
-    public function setLocalData(string $key, $value): void
+    public function setLocalDataValue(string $key, $value): void
     {
+        if (!$this->localData) {
+            $this->localData = [];
+        }
         $this->localData[$key] = $value;
     }
 
     /**
+     * @Ignore
      * Gets local data from a Course object.
      *
      * @return ?mixed
      */
-    public function getLocalData(string $key)
+    public function getLocalDataValue(string $key)
     {
-        return $this->localData[$key] ?? null;
+        return $this->localData ? ($this->localData[$key] ?? null) : null;
     }
 }

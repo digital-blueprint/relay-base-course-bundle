@@ -60,7 +60,8 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *                 "tags" = {"BaseCourse"},
  *                 "parameters" = {
  *                     {"name" = "identifier", "in" = "path", "description" = "Id of course", "required" = true, "type" = "string", "example" = "257571"},
- *                     {"name" = "lang", "in" = "query", "description" = "Language of result", "type" = "string", "enum" = {"de", "en"}, "example" = "de"}
+ *                     {"name" = "lang", "in" = "query", "description" = "Language of result", "type" = "string", "enum" = {"de", "en"}, "example" = "de"},
+ *                     {"name" = "include", "in" = "query", "description" = "Optional resources to include ", "type" = "string", "example" = "localData"}
  *                 }
  *             }
  *         }

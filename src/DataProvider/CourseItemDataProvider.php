@@ -8,7 +8,9 @@ use ApiPlatform\Core\DataProvider\ItemDataProviderInterface;
 use ApiPlatform\Core\DataProvider\RestrictedDataProviderInterface;
 use Dbp\Relay\BaseCourseBundle\API\CourseProviderInterface;
 use Dbp\Relay\BaseCourseBundle\Entity\Course;
+use Dbp\Relay\CoreBundle\Exception\ApiError;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 
 final class CourseItemDataProvider extends AbstractController implements ItemDataProviderInterface, RestrictedDataProviderInterface
 {
@@ -28,8 +30,17 @@ final class CourseItemDataProvider extends AbstractController implements ItemDat
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
+        $options = [];
         $filters = $context['filters'] ?? [];
-        $options = ['lang' => $filters['lang'] ?? 'de'];
+        $options['lang'] = $filters['lang'] ?? 'de';
+
+        if ($include = ($filters['include'] ?? null)) {
+            if ($include === 'localData') {
+                $options['includeLocalData'] = true;
+            } else {
+                throw new ApiError(Response::HTTP_BAD_REQUEST, 'requested inclusion of unknown resource '.$include);
+            }
+        }
 
         return $this->api->getCourseById($id, $options);
     }
