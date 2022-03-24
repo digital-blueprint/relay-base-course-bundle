@@ -1,92 +1,67 @@
 # DbpRelayBaseCourseBundle
+[GitLab](https://gitlab.tugraz.at/dbp/relay/dbp-relay-base-course-bundle)
 
-This Symfony bundle can be used as a template for creating new bundles for the
-DBP Relay project.
 
-When including this bundle into your API server it will gain the following
-features:
-
-* A custom `./bin/console` command
-* An example entity
-* Various HTTP methods implemented for that entity
-
-## TL;DR
-
-The quickest way to make use of this template bundle is to feed your desired names
-to one command and generate a ready-to-use bundle with the correct naming.
-
-See [Generate DBP Symfony bundle](https://dbp-demo.tugraz.at/dev-guide/relay/naming/#generate-dbp-symfony-bundle) for more information.
-
-## Using the Bundle as a Template
-
-* Copy the repo contents
-* Adjust the package name in `composer.json`, in this example we'll pretend you named your bundle `dbp/relay-your-bundle`
-* Invent a new PHP namespace and adjust it in all PHP files
-* Rename `src/DbpRelayBaseCourseBundle` and `DependencyInjection/DbpRelayCourseExtension` to match the new project name
-
-## Integration into the API Server
-
-* Push your bundle on a git server, in this example we'll use `git@gitlab.tugraz.at:dbp/relay/dbp-relay-your-bundle.git`
-* Add the repository to your composer.json (as soon as you published your bundle to [Packagist](https://packagist.org/)
-  you can remove that block again):
-
-```json
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "git@gitlab.tugraz.at:dbp/relay/dbp-relay-your-bundle.git"
-        }
-    ],
-```
+## Integration into the Relay API Server
 
 * Add the bundle package as a dependency:
 
-```bash
-composer require dbp/relay-your-bundle=dev-main
+```
+composer require dbp/relay-base-course-bundle
 ```
 
 * Add the bundle to your `config/bundles.php`:
 
 ```php
 ...
-Dbp\Relay\YourBundle\DbpRelayYourBundle::class => ['all' => true],
-DBP\API\CoreBundle\DbpCoreBundle::class => ['all' => true],
+Dbp\Relay\BasePersonBundle\DbpRelayBaseCourseBundle::class => ['all' => true],
+...
 ];
 ```
 
 * Run `composer install` to clear caches
 
-## Configuration
+## Course provider implementation
 
-The bundle has a `example_config` configuration value that you can specify in your
-app, either by hard-coding it, or by referencing an environment variable.
+For this bundle to work you need to add a service that implements the
+[CourseProviderInterface](https://gitlab.tugraz.at/dbp/relay/dbp-relay-base-course-bundle/-/blob/main/src/API/CourseProviderInterface.php)
+to your application.
 
-For this create `config/packages/dbp_relay_course.yaml` in the app with the following
-content:
+### Example
 
-```yaml
-dbp_relay_course:
-  example_config: 42
-  # example_config: '%env(EXAMPLE_CONFIG)%'
+#### Service class
+
+For example, create a service `src/Service/CourseProvider.php`:
+
+```php
+<?php
+
+namespace App\Service;
+
+use Dbp\Relay\BaseCourseBundle\API\CourseProviderInterface;
+use Dbp\Relay\BaseCourseBundle\Entity\Course;
+
+class CourseProvider implements CourseProviderInterface
+{
+    public function getCourseById(string $identifier, array $options = []): ?Course
+    {
+        $course = new Course();
+        $course->setIdentifier($identifier);
+        $course->setName('Field Theory');
+        $course->setDescription('News from field theory');
+
+        return $course;
+    }
+    
+    ...
+}
 ```
 
-The value gets read in `DbpRelayCourseExtension` (your extension will be named differently)
-and passed when creating the `MyCustomService` service.
+#### Services configuration
 
-For more info on bundle configuration see [Symfony bundles configuration](https://symfony.com/doc/current/bundles/configuration.html).
+For the example service above you need to add the following to your `src/Resources/config/services.yaml`:
 
-## Development & Testing
-
-* Install dependencies: `composer install`
-* Run tests: `composer test`
-* Run linters: `composer run lint`
-* Run cs-fixer: `composer run cs-fix`
-
-## Bundle dependencies
-
-Don't forget you need to pull down your dependencies in your main application if you are installing packages in a bundle.
-
-```bash
-# updates and installs dependencies from dbp/relay-your-bundle
-composer update dbp/relay-your-bundle
+```yaml
+  Dbp\Relay\BaseCourseBundle\API\CourseProviderInterface:
+    '@App\Service\CourseProvider'
 ```
