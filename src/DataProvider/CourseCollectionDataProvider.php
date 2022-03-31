@@ -48,7 +48,9 @@ final class CourseCollectionDataProvider extends AbstractController implements C
             if (!empty($personId)) {
                 $coursesByPerson = $this->courseProvider->getCoursesByPerson($personId, $options);
                 if (!empty($organizationId)) {
-                    $courses = array_uintersect($courses, $coursesByPerson, compareCourses);
+                    $courses = array_uintersect($courses, $coursesByPerson,
+                        'Dbp\Relay\BaseCourseBundle\DataProvider\CourseCollectionDataProvider::compareCourses');
+                    $courses = array_values($courses);
                 } else {
                     $courses = $coursesByPerson;
                 }
@@ -70,11 +72,11 @@ final class CourseCollectionDataProvider extends AbstractController implements C
         return new ArrayFullPaginator($courses, $page, $perPage);
     }
 
-    private static function compareCourses(Course $a, Course $b): int
+    public static function compareCourses(Course $a, Course $b): int
     {
         if ($a->getIdentifier() > $b->getIdentifier()) {
             return 1;
-        } else if ($a->getIdentifier() === $b->getIdentifier()) {
+        } elseif ($a->getIdentifier() === $b->getIdentifier()) {
             return 0;
         } else {
             return -1;
