@@ -13,11 +13,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 final class CourseCollectionDataProvider extends AbstractController implements CollectionDataProviderInterface, RestrictedDataProviderInterface
 {
-    private $api;
+    private $courseProvider;
 
-    public function __construct(CourseProviderInterface $api)
+    public function __construct(CourseProviderInterface $courseProvider)
     {
-        $this->api = $api;
+        $this->courseProvider = $courseProvider;
     }
 
     public function supports(string $resourceClass, string $operationName = null, array $context = []): bool
@@ -29,12 +29,32 @@ final class CourseCollectionDataProvider extends AbstractController implements C
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
+        $options = [];
         $filters = $context['filters'] ?? [];
-        $options = ['lang' => $filters['lang'] ?? 'de'];
-
+        $options['lang'] = $filters['lang'] ?? 'de';
         $term = $filters['term'] ?? null;
         if ($term !== null) {
             $options['term'] = $term;
+        }
+
+        $organizationId = $filters['organizationId'] ?? null;
+        $personId = $filters['personId'] ?? null;
+
+        $courses = null;
+        if (!empty($organizationId) || !empty($personId)) {
+            if (!empty($organizationId)) {
+                $courses = $this->courseProvider->getCoursesByOrganization($organizationId, $options);
+            }
+            if (!empty($personId)) {
+                $coursesByPerson = $this->courseProvider->getCoursesByPerson($personId, $options);
+                if (!empty($organizationId)) {
+                    $courses = array_uintersect($courses, $coursesByPerson, compareCourses);
+                } else {
+                    $courses = $coursesByPerson;
+                }
+            }
+        } else {
+            $courses = $this->courseProvider->getCourses($options);
         }
 
         $page = 1;
@@ -47,6 +67,17 @@ final class CourseCollectionDataProvider extends AbstractController implements C
             $perPage = (int) $filters['perPage'];
         }
 
-        return new ArrayFullPaginator($this->api->getCourses($options), $page, $perPage);
+        return new ArrayFullPaginator($courses, $page, $perPage);
+    }
+
+    private static function compareCourses(Course $a, Course $b): int
+    {
+        if ($a->getIdentifier() > $b->getIdentifier()) {
+            return 1;
+        } else if ($a->getIdentifier() === $b->getIdentifier()) {
+            return 0;
+        } else {
+            return -1;
+        }
     }
 }
