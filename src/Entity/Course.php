@@ -37,6 +37,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *             }
  *         }
  *     },
+ *     shortName="BaseCourse",
  *     iri="https://schema.org/Course",
  *     normalizationContext={"groups" = {"BaseCourse:output"}, "jsonld_embed_context" = true},
  * )
