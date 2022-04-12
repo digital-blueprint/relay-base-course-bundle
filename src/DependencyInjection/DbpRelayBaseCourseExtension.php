@@ -16,6 +16,12 @@ class DbpRelayBaseCourseExtension extends ConfigurableExtension
         $this->extendArrayParameter(
             $container, 'api_platform.resource_class_directories', [__DIR__.'/../Entity']);
 
+        $this->extendArrayParameter(
+            $container, 'dbp_api.paths_to_hide', [
+            '/course_attendees',
+            '/course_attendees/{identifier}',
+        ]);
+
         $loader = new YamlFileLoader(
             $container,
             new FileLocator(__DIR__.'/../Resources/config')

@@ -34,7 +34,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *                 "tags" = {"BaseCourse"},
  *                 "summary" = "Get the attendees of a course.",
  *                 "parameters" = {
- *                     {"name" = "identifier", "in" = "path", "description" = "Id of course", "required" = true, "type" = "string", "example" = "123456"},
+ *                     {"name" = "identifier", "in" = "path", "description" = "Resource identifier", "required" = true, "type" = "string", "example" = "257571"},
  *                     {"name" = "lang", "in" = "query", "description" = "Language of result", "type" = "string", "enum" = {"de", "en"}, "example" = "de"}
  *                 }
  *             }

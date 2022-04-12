@@ -8,8 +8,10 @@ use ApiPlatform\Core\DataProvider\CollectionDataProviderInterface;
 use ApiPlatform\Core\DataProvider\RestrictedDataProviderInterface;
 use Dbp\Relay\BaseCourseBundle\API\CourseProviderInterface;
 use Dbp\Relay\BaseCourseBundle\Entity\Course;
+use Dbp\Relay\CoreBundle\Exception\ApiError;
 use Dbp\Relay\CoreBundle\Helpers\ArrayFullPaginator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 
 final class CourseCollectionDataProvider extends AbstractController implements CollectionDataProviderInterface, RestrictedDataProviderInterface
 {
@@ -29,24 +31,33 @@ final class CourseCollectionDataProvider extends AbstractController implements C
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
-        $options = [];
         $filters = $context['filters'] ?? [];
+
+        $options = [];
         $options['lang'] = $filters['lang'] ?? 'de';
-        $term = $filters['term'] ?? null;
-        if ($term !== null) {
+
+        if ($term = ($filters['term'] ?? null)) {
             $options['term'] = $term;
         }
 
-        $organizationId = $filters['organizationId'] ?? null;
-        $personId = $filters['personId'] ?? null;
+        if ($include = ($filters['include'] ?? null)) {
+            if ($include === 'localData') {
+                $options['includeLocalData'] = true;
+            } else {
+                throw new ApiError(Response::HTTP_BAD_REQUEST, 'requested inclusion of unknown resource '.$include);
+            }
+        }
+
+        $organizationId = $filters['organization'] ?? null;
+        $lecturerId = $filters['lecturer'] ?? null;
 
         $courses = null;
-        if (!empty($organizationId) || !empty($personId)) {
+        if (!empty($organizationId) || !empty($lecturerId)) {
             if (!empty($organizationId)) {
                 $courses = $this->courseProvider->getCoursesByOrganization($organizationId, $options);
             }
-            if (!empty($personId)) {
-                $coursesByPerson = $this->courseProvider->getCoursesByPerson($personId, $options);
+            if (!empty($lecturerId)) {
+                $coursesByPerson = $this->courseProvider->getCoursesByPerson($lecturerId, $options);
                 if (!empty($organizationId)) {
                     $courses = array_uintersect($courses, $coursesByPerson,
                         'Dbp\Relay\BaseCourseBundle\DataProvider\CourseCollectionDataProvider::compareCourses');

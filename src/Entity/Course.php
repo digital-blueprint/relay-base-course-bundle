@@ -17,8 +17,9 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *                 "parameters" = {
  *                     {"name" = "lang", "in" = "query", "description" = "Language of result", "type" = "string", "enum" = {"de", "en"}, "example" = "de"},
  *                     {"name" = "term", "in" = "query", "description" = "Teaching term", "type" = "string", "enum" = {"W", "S"}, "example" = "W"},
- *                     {"name" = "organizationId", "in" = "query", "description" = "ID of organization", "required" = false, "type" = "string", "example" = "1190"},
- *                     {"name" = "personId", "in" = "query", "description" = "ID of lecturer", "required" = false, "type" = "string", "example" = "woody007"},
+ *                     {"name" = "organization", "in" = "query", "description" = "Get courses of an organization (ID of BaseOrganization resource)", "required" = false, "type" = "string", "example" = "1190"},
+ *                     {"name" = "lecturer", "in" = "query", "description" = "Get courses of a lecturer", "required" = false, "type" = "string", "example" = "woody007"},
+ *                     {"name" = "include", "in" = "query", "description" = "Optional resources to include", "type" = "string", "example" = "localData"}
  *                 }
  *             }
  *         }
@@ -29,9 +30,9 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *             "openapi_context" = {
  *                 "tags" = {"BaseCourse"},
  *                 "parameters" = {
- *                     {"name" = "identifier", "in" = "path", "description" = "Id of course", "required" = true, "type" = "string", "example" = "257571"},
+ *                     {"name" = "identifier", "in" = "path", "description" = "Resource identifier", "required" = true, "type" = "string", "example" = "257571"},
  *                     {"name" = "lang", "in" = "query", "description" = "Language of result", "type" = "string", "enum" = {"de", "en"}, "example" = "de"},
- *                     {"name" = "include", "in" = "query", "description" = "Optional resources to include ", "type" = "string", "example" = "localData"}
+ *                     {"name" = "include", "in" = "query", "description" = "Optional resources to include", "type" = "string", "example" = "localData"}
  *                 }
  *             }
  *         }
