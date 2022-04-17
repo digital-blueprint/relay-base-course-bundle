@@ -8,10 +8,8 @@ use ApiPlatform\Core\DataProvider\CollectionDataProviderInterface;
 use ApiPlatform\Core\DataProvider\RestrictedDataProviderInterface;
 use Dbp\Relay\BaseCourseBundle\API\CourseProviderInterface;
 use Dbp\Relay\BaseCourseBundle\Entity\Course;
-use Dbp\Relay\CoreBundle\Exception\ApiError;
 use Dbp\Relay\CoreBundle\Helpers\ArrayFullPaginator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
 
 final class CourseCollectionDataProvider extends AbstractController implements CollectionDataProviderInterface, RestrictedDataProviderInterface
 {
@@ -41,11 +39,7 @@ final class CourseCollectionDataProvider extends AbstractController implements C
         }
 
         if ($include = ($filters['include'] ?? null)) {
-            if ($include === 'localData') {
-                $options['includeLocalData'] = true;
-            } else {
-                throw new ApiError(Response::HTTP_BAD_REQUEST, 'requested inclusion of unknown resource '.$include);
-            }
+            $options['include'] = $include;
         }
 
         $organizationId = $filters['organization'] ?? null;

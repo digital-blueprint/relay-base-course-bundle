@@ -15,7 +15,6 @@ class DummyCourseProvider implements CourseProviderInterface
         $course = new Course();
         $course->setIdentifier($identifier);
         $course->setName('Field Theory');
-        $course->setDescription('News from field theory');
 
         return $course;
     }

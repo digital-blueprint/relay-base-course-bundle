@@ -6,8 +6,8 @@
         "php": ">=7.3",
         "ext-json": "*",
         "api-platform/core": "^2.6",
-        "dbp/relay-base-person-bundle": "^0.2.0",
-        "dbp/relay-core-bundle": "^0.1.11",
+        "dbp/relay-base-person-bundle": "dev-main as 0.2.0",
+        "dbp/relay-core-bundle": "dev-main as 0.1.32",
         "symfony/config": "^5.4",
         "symfony/framework-bundle": "^5.4",
         "symfony/security-bundle": "^5.4",
@@ -31,6 +31,10 @@
         {
             "type": "vcs",
             "url": "git@gitlab.tugraz.at:dbp/relay/dbp-relay-base-person-bundle.git"
+        },
+        {
+            "type": "vcs",
+            "url": "git@gitlab.tugraz.at:dbp/relay/dbp-relay-core-bundle.git"
         }
     ],
     "autoload": {

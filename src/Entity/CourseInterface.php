@@ -17,8 +17,4 @@ interface CourseInterface
     public function getType(): string;
 
     public function setType(string $type): void;
-
-    public function getDescription(): string;
-
-    public function setDescription(string $description): void;
 }
