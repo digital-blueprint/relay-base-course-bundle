@@ -173,11 +173,11 @@
             "source": {
                 "type": "git",
                 "url": "git@gitlab.tugraz.at:dbp/relay/dbp-relay-base-person-bundle.git",
-                "reference": "2f5f6dc3ca4adebdcb0838845e11cbe283f07204"
+                "reference": "0189f48c563ab8a5e6a37db025d560f417db194d"
             },
             "require": {
                 "api-platform/core": "^2.6.3",
-                "dbp/relay-core-bundle": "^0.1.25",
+                "dbp/relay-core-bundle": "dev-main as 0.1.32",
                 "ext-json": "*",
                 "guzzlehttp/guzzle": "^7.0",
                 "nelmio/cors-bundle": "^2.1.0",
@@ -244,7 +244,7 @@
             "license": [
                 "AGPL-3.0-or-later"
             ],
-            "time": "2022-04-16T00:28:26+00:00"
+            "time": "2022-04-17T20:09:34+00:00"
         },
         {
             "name": "dbp/relay-core-bundle",
