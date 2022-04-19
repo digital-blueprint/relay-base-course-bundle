@@ -173,7 +173,7 @@
             "source": {
                 "type": "git",
                 "url": "git@gitlab.tugraz.at:dbp/relay/dbp-relay-base-person-bundle.git",
-                "reference": "0189f48c563ab8a5e6a37db025d560f417db194d"
+                "reference": "00084de146defc2fd6c9c8da71c692462d2bbf34"
             },
             "require": {
                 "api-platform/core": "^2.6.3",
@@ -244,7 +244,7 @@
             "license": [
                 "AGPL-3.0-or-later"
             ],
-            "time": "2022-04-17T20:09:34+00:00"
+            "time": "2022-04-19T07:09:19+00:00"
         },
         {
             "name": "dbp/relay-core-bundle",
