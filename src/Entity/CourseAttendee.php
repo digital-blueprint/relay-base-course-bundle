@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace Dbp\Relay\BaseCourseBundle\Entity;
 
+use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Dbp\Relay\BaseCourseBundle\Controller\GetAttendeesByCourse;
-use Dbp\Relay\BasePersonBundle\Entity\PersonInterface;
-use Dbp\Relay\BasePersonBundle\Entity\PersonTrait;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
@@ -28,7 +27,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *             "read" = false,
  *             "normalization_context" = {
  *                 "jsonld_embed_context" = true,
- *                 "groups" = {"BasePerson:output"}
+ *                 "groups" = {"CourseAttendee:output"}
  *             },
  *             "openapi_context" = {
  *                 "tags" = {"BaseCourse"},
@@ -53,12 +52,83 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *     shortName="CourseAttendee",
  *     description="A person attending a course",
  *     normalizationContext={
- *         "groups" = {"BasePerson:output"},
+ *         "groups" = {"CourseAttendee:output"},
  *         "jsonld_embed_context" = true,
  *     }
  * )
  */
-class CourseAttendee implements PersonInterface
+class CourseAttendee
 {
-    use PersonTrait;
+    /**
+     * @ApiProperty(identifier=true)
+     * @Groups({"CourseAttendee:output"})
+     *
+     * @var string
+     */
+    private $identifier;
+
+    /**
+     * @ApiProperty(iri="http://schema.org/givenName")
+     * @Groups({"CourseAttendee:output"})
+     *
+     * @var string
+     */
+    private $givenName;
+
+    /**
+     * @var string
+     * @ApiProperty(iri="http://schema.org/familyName")
+     * @Groups({"CourseAttendee:output"})
+     *
+     * @var string
+     */
+    private $familyName;
+
+    /**
+     * @ApiProperty(iri="http://schema.org/email")
+     * @Groups({"CourseAttendee:output"})
+     *
+     * @var string
+     */
+    private $email;
+
+    public function setIdentifier(string $identifier): void
+    {
+        $this->identifier = $identifier;
+    }
+
+    public function getIdentifier(): ?string
+    {
+        return $this->identifier;
+    }
+
+    public function getGivenName(): ?string
+    {
+        return $this->givenName;
+    }
+
+    public function setGivenName(string $givenName): void
+    {
+        $this->givenName = $givenName;
+    }
+
+    public function getFamilyName(): ?string
+    {
+        return $this->familyName;
+    }
+
+    public function setFamilyName(string $familyName): void
+    {
+        $this->familyName = $familyName;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): void
+    {
+        $this->email = $email;
+    }
 }
