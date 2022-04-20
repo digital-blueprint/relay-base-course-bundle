@@ -5,9 +5,8 @@ declare(strict_types=1);
 namespace Dbp\Relay\BaseCourseBundle\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
-use Dbp\Relay\CoreBundle\Entity\LocalDataAwareInterface;
-use Dbp\Relay\CoreBundle\Entity\LocalDataAwareTrait;
-use Symfony\Component\Serializer\Annotation\Groups;
+use Dbp\Relay\CoreBundle\LocalData\LocalDataAwareInterface;
+use Dbp\Relay\CoreBundle\LocalData\LocalDataAwareTrait;
 
 /**
  * @ApiResource(
