@@ -50,7 +50,7 @@ final class CourseCollectionDataProvider extends AbstractController implements C
                 $courses = $this->courseProvider->getCoursesByOrganization($organizationId, $options);
             }
             if (!empty($lecturerId)) {
-                $coursesByPerson = $this->courseProvider->getCoursesByPerson($lecturerId, $options);
+                $coursesByPerson = $this->courseProvider->getCoursesByLecturer($lecturerId, $options);
                 if (!empty($organizationId)) {
                     $courses = array_uintersect($courses, $coursesByPerson,
                         'Dbp\Relay\BaseCourseBundle\DataProvider\CourseCollectionDataProvider::compareCourses');

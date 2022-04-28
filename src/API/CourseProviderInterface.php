@@ -24,7 +24,7 @@ interface CourseProviderInterface
     /**
      * @return Course[]
      */
-    public function getCoursesByPerson(string $personId, array $options = []): array;
+    public function getCoursesByLecturer(string $lecturerId, array $options = []): array;
 
     /**
      * @return CourseAttendee[]
