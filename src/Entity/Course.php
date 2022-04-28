@@ -19,8 +19,8 @@ use Dbp\Relay\CoreBundle\LocalData\LocalDataAwareTrait;
  *                     {"name" = "lang", "in" = "query", "description" = "Language of result", "type" = "string", "enum" = {"de", "en"}, "example" = "de"},
  *                     {"name" = "term", "in" = "query", "description" = "Teaching term", "type" = "string", "enum" = {"W", "S"}, "example" = "W"},
  *                     {"name" = "organization", "in" = "query", "description" = "Get courses of an organization (ID of BaseOrganization resource)", "required" = false, "type" = "string", "example" = "1190"},
- *                     {"name" = "lecturer", "in" = "query", "description" = "Get courses of a lecturer", "required" = false, "type" = "string", "example" = "woody007"},
- *                     {"name" = "include", "in" = "query", "description" = "Optional resources to include", "type" = "string", "example" = "BaseCourse.code,BaseCourse.numberOfCredits"}
+ *                     {"name" = "lecturer", "in" = "query", "description" = "Get courses of a lecturer (ID of BasePerson resource)", "required" = false, "type" = "string", "example" = "woody007"},
+ *                     {"name" = "includeLocal", "in" = "query", "description" = "Local data attributes to include", "type" = "string", "example" = "BaseCourse.code,BaseCourse.numberOfCredits"}
  *                 }
  *             }
  *         }
@@ -33,7 +33,7 @@ use Dbp\Relay\CoreBundle\LocalData\LocalDataAwareTrait;
  *                 "parameters" = {
  *                     {"name" = "identifier", "in" = "path", "description" = "Resource identifier", "required" = true, "type" = "string", "example" = "257571"},
  *                     {"name" = "lang", "in" = "query", "description" = "Language of result", "type" = "string", "enum" = {"de", "en"}, "example" = "de"},
- *                     {"name" = "include", "in" = "query", "description" = "Optional resources to include", "type" = "string", "example" = "BaseCourse.code,BaseCourse.numberOfCredits"}
+ *                     {"name" = "includeLocal", "in" = "query", "description" = "Local data attributes to include", "type" = "string", "example" = "BaseCourse.code,BaseCourse.numberOfCredits"}
  *                 }
  *             }
  *         }

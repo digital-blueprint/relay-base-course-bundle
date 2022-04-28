@@ -8,6 +8,7 @@ use ApiPlatform\Core\DataProvider\ItemDataProviderInterface;
 use ApiPlatform\Core\DataProvider\RestrictedDataProviderInterface;
 use Dbp\Relay\BaseCourseBundle\API\CourseProviderInterface;
 use Dbp\Relay\BaseCourseBundle\Entity\Course;
+use Dbp\Relay\CoreBundle\LocalData\LocalData;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 final class CourseItemDataProvider extends AbstractController implements ItemDataProviderInterface, RestrictedDataProviderInterface
@@ -32,10 +33,7 @@ final class CourseItemDataProvider extends AbstractController implements ItemDat
         $options = [];
 
         $options['lang'] = $filters['lang'] ?? 'de';
-
-        if ($include = ($filters['include'] ?? null)) {
-            $options['include'] = $include;
-        }
+        $options[LocalData::INCLUDE_PARAMETER_NAME] = LocalData::getIncludeParameter($filters);
 
         return $this->api->getCourseById($id, $options);
     }

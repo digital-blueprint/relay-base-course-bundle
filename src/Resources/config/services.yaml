@@ -9,11 +9,6 @@ services:
     autowire: true
     autoconfigure: true
 
-#  Dbp\Relay\BaseCourseBundle\Serializer\Normalizer\CourseNormalizer:
-#    autowire: true
-#    autoconfigure: true
-#    tags: ['serializer.normalizer']
-
   Dbp\Relay\BaseCourseBundle\Service\DummyCourseProvider:
     autowire: true
     autoconfigure: true

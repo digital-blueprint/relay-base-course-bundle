@@ -9,6 +9,7 @@ use ApiPlatform\Core\DataProvider\RestrictedDataProviderInterface;
 use Dbp\Relay\BaseCourseBundle\API\CourseProviderInterface;
 use Dbp\Relay\BaseCourseBundle\Entity\Course;
 use Dbp\Relay\CoreBundle\Helpers\ArrayFullPaginator;
+use Dbp\Relay\CoreBundle\LocalData\LocalData;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 final class CourseCollectionDataProvider extends AbstractController implements CollectionDataProviderInterface, RestrictedDataProviderInterface
@@ -38,9 +39,7 @@ final class CourseCollectionDataProvider extends AbstractController implements C
             $options['term'] = $term;
         }
 
-        if ($include = ($filters['include'] ?? null)) {
-            $options['include'] = $include;
-        }
+        $options[LocalData::INCLUDE_PARAMETER_NAME] = LocalData::getIncludeParameter($filters);
 
         $organizationId = $filters['organization'] ?? null;
         $lecturerId = $filters['lecturer'] ?? null;
