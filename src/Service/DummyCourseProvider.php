@@ -10,7 +10,7 @@ use Dbp\Relay\BaseCourseBundle\Entity\CourseAttendee;
 
 class DummyCourseProvider implements CourseProviderInterface
 {
-    public function getCourseById(string $identifier, array $options = []): ?Course
+    public function getCourseById(string $identifier, array $options = []): Course
     {
         $course = new Course();
         $course->setIdentifier($identifier);
