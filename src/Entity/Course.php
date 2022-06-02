@@ -16,6 +16,7 @@ use Dbp\Relay\CoreBundle\LocalData\LocalDataAwareTrait;
  *             "openapi_context" = {
  *                 "tags" = {"BaseCourse"},
  *                 "parameters" = {
+ *                     {"name" = "search", "in" = "query", "description" = "Search for a course", "type" = "string", "required" = false},
  *                     {"name" = "lang", "in" = "query", "description" = "Language of result", "type" = "string", "enum" = {"de", "en"}, "example" = "de"},
  *                     {"name" = "term", "in" = "query", "description" = "Teaching term", "type" = "string", "enum" = {"W", "S"}, "example" = "W"},
  *                     {"name" = "organization", "in" = "query", "description" = "Get courses of an organization (ID of BaseOrganization resource)", "required" = false, "type" = "string", "example" = "1190"},

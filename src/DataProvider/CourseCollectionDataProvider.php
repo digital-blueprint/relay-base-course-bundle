@@ -8,17 +8,22 @@ use ApiPlatform\Core\DataProvider\CollectionDataProviderInterface;
 use ApiPlatform\Core\DataProvider\RestrictedDataProviderInterface;
 use Dbp\Relay\BaseCourseBundle\API\CourseProviderInterface;
 use Dbp\Relay\BaseCourseBundle\Entity\Course;
-use Dbp\Relay\CoreBundle\Helpers\ArrayFullPaginator;
 use Dbp\Relay\CoreBundle\LocalData\LocalData;
+use Dbp\Relay\CoreBundle\Pagination\Pagination;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 final class CourseCollectionDataProvider extends AbstractController implements CollectionDataProviderInterface, RestrictedDataProviderInterface
 {
+    /** @var CourseProviderInterface */
     private $courseProvider;
 
-    public function __construct(CourseProviderInterface $courseProvider)
+    /** @var Pagination */
+    private $pagination;
+
+    public function __construct(CourseProviderInterface $courseProvider, Pagination $pagination)
     {
         $this->courseProvider = $courseProvider;
+        $this->pagination = $pagination;
     }
 
     public function supports(string $resourceClass, string $operationName = null, array $context = []): bool
@@ -26,7 +31,7 @@ final class CourseCollectionDataProvider extends AbstractController implements C
         return Course::class === $resourceClass;
     }
 
-    public function getCollection(string $resourceClass, string $operationName = null, array $context = []): ArrayFullPaginator
+    public function getCollection(string $resourceClass, string $operationName = null, array $context = []): iterable
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
@@ -35,45 +40,50 @@ final class CourseCollectionDataProvider extends AbstractController implements C
         $options = [];
         $options['lang'] = $filters['lang'] ?? 'de';
 
+        if ($search = ($filters['search'] ?? null)) {
+            $options['search'] = $search;
+        }
+
         if ($term = ($filters['term'] ?? null)) {
             $options['term'] = $term;
         }
 
-        $options[LocalData::INCLUDE_PARAMETER_NAME] = LocalData::getIncludeParameter($filters);
+        if ($includeParameter = LocalData::getIncludeParameter($filters)) {
+            $options[LocalData::INCLUDE_PARAMETER_NAME] = $includeParameter;
+        }
 
-        $organizationId = $filters['organization'] ?? null;
-        $lecturerId = $filters['lecturer'] ?? null;
+        $organizationId = $filters['organization'] ?? '';
+        $lecturerId = $filters['lecturer'] ?? '';
 
-        $courses = null;
-        if (!empty($organizationId) || !empty($lecturerId)) {
-            if (!empty($organizationId)) {
-                $courses = $this->courseProvider->getCoursesByOrganization($organizationId, $options);
+        $filterByOrganizationId = $organizationId !== '';
+        $filterByLecturerId = $lecturerId !== '';
+
+        if (!($filterByOrganizationId && $filterByLecturerId)) {
+            $this->pagination->addPaginationOptions($options, $resourceClass, $operationName, $context);
+        } // else -> request the whole set of results
+
+        $coursePaginator = null;
+        if ($filterByOrganizationId || $filterByLecturerId) {
+            if ($filterByOrganizationId) {
+                $coursePaginator = $this->courseProvider->getCoursesByOrganization($organizationId, $options);
             }
-            if (!empty($lecturerId)) {
-                $coursesByPerson = $this->courseProvider->getCoursesByLecturer($lecturerId, $options);
-                if (!empty($organizationId)) {
-                    $courses = array_uintersect($courses, $coursesByPerson,
-                        'Dbp\Relay\BaseCourseBundle\DataProvider\CourseCollectionDataProvider::compareCourses');
-                    $courses = array_values($courses);
+            if ($filterByLecturerId) {
+                $coursesByPersonPaginator = $this->courseProvider->getCoursesByLecturer($lecturerId, $options);
+
+                if (!$filterByOrganizationId) {
+                    $coursePaginator = $coursesByPersonPaginator;
                 } else {
-                    $courses = $coursesByPerson;
+                    $intersection = array_uintersect($coursePaginator->getItems(), $coursesByPersonPaginator->getItems(),
+                        'Dbp\Relay\BaseCourseBundle\DataProvider\CourseCollectionDataProvider::compareCourses');
+                    $courses = array_values($intersection);
+                    $coursePaginator = $this->pagination->createWholeResultPaginator($courses, $resourceClass, $operationName, $context);
                 }
             }
         } else {
-            $courses = $this->courseProvider->getCourses($options);
+            $coursePaginator = $this->courseProvider->getCourses($options);
         }
 
-        $page = 1;
-        if (isset($filters['page'])) {
-            $page = (int) $filters['page'];
-        }
-
-        $perPage = 30;
-        if (isset($filters['perPage'])) {
-            $perPage = (int) $filters['perPage'];
-        }
-
-        return new ArrayFullPaginator($courses, $page, $perPage);
+        return $coursePaginator ?? [];
     }
 
     public static function compareCourses(Course $a, Course $b): int

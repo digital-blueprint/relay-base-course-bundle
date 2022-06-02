@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Dbp\Relay\BaseCourseBundle\API;
 
 use Dbp\Relay\BaseCourseBundle\Entity\Course;
-use Dbp\Relay\BaseCourseBundle\Entity\CourseAttendee;
 use Dbp\Relay\CoreBundle\Exception\ApiError;
+use Dbp\Relay\CoreBundle\Pagination\Paginator;
 
 interface CourseProviderInterface
 {
@@ -16,30 +16,22 @@ interface CourseProviderInterface
     public function getCourseById(string $identifier, array $options = []): Course;
 
     /**
-     * @return Course[]
-     *
      * @throws ApiError
      */
-    public function getCourses(array $options = []): array;
+    public function getCourses(array $options = []): Paginator;
 
     /**
-     * @return Course[]
-     *
      * @throws ApiError
      */
-    public function getCoursesByOrganization(string $orgUnitId, array $options = []): array;
+    public function getCoursesByOrganization(string $orgUnitId, array $options = []): Paginator;
 
     /**
-     * @return Course[]
-     *
      * @throws ApiError
      */
-    public function getCoursesByLecturer(string $lecturerId, array $options = []): array;
+    public function getCoursesByLecturer(string $lecturerId, array $options = []): Paginator;
 
     /**
-     * @return CourseAttendee[]
-     *
      * @throws ApiError
      */
-    public function getAttendeesByCourse(string $courseId, array $options = []): array;
+    public function getAttendeesByCourse(string $courseId, array $options = []): Paginator;
 }
