@@ -173,12 +173,12 @@
             "source": {
                 "type": "git",
                 "url": "https://gitlab.tugraz.at/dbp/relay/dbp-relay-core-bundle.git",
-                "reference": "e779e2d537c6d34cb9d622594313ef3e89a41cf5"
+                "reference": "860fbb25ccc3fc3e5c9f71cd5957c3dac4349155"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.tugraz.at/api/v4/projects/dbp%2Frelay%2Fdbp-relay-core-bundle/repository/archive.zip?sha=e779e2d537c6d34cb9d622594313ef3e89a41cf5",
-                "reference": "e779e2d537c6d34cb9d622594313ef3e89a41cf5",
+                "url": "https://gitlab.tugraz.at/api/v4/projects/dbp%2Frelay%2Fdbp-relay-core-bundle/repository/archive.zip?sha=860fbb25ccc3fc3e5c9f71cd5957c3dac4349155",
+                "reference": "860fbb25ccc3fc3e5c9f71cd5957c3dac4349155",
                 "shasum": ""
             },
             "require": {
@@ -279,7 +279,7 @@
                 "source": "https://gitlab.tugraz.at/dbp/relay/dbp-relay-core-bundle/-/tree/main",
                 "issues": "https://gitlab.tugraz.at/dbp/relay/dbp-relay-core-bundle/-/issues"
             },
-            "time": "2022-06-04T02:25:53+02:00"
+            "time": "2022-06-06T02:27:29+02:00"
         },
         {
             "name": "doctrine/annotations",
