@@ -17,13 +17,9 @@ final class CourseCollectionDataProvider extends AbstractController implements C
     /** @var CourseProviderInterface */
     private $courseProvider;
 
-    /** @var Pagination */
-    private $pagination;
-
-    public function __construct(CourseProviderInterface $courseProvider, Pagination $pagination)
+    public function __construct(CourseProviderInterface $courseProvider)
     {
         $this->courseProvider = $courseProvider;
-        $this->pagination = $pagination;
     }
 
     public function supports(string $resourceClass, string $operationName = null, array $context = []): bool
@@ -36,7 +32,6 @@ final class CourseCollectionDataProvider extends AbstractController implements C
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
         $filters = $context['filters'] ?? [];
-
         $options = [];
         $options['lang'] = $filters['lang'] ?? 'de';
 
@@ -58,9 +53,11 @@ final class CourseCollectionDataProvider extends AbstractController implements C
         $filterByOrganizationId = $organizationId !== '';
         $filterByLecturerId = $lecturerId !== '';
 
+        dump($context);
+
         if (!($filterByOrganizationId && $filterByLecturerId)) {
-            $this->pagination->addPaginationOptions($options, $resourceClass, $operationName, $context);
-        } // else -> request the whole set of results
+            Pagination::addPaginationOptions($options, $filters);
+        } // else (both filters provided) -> request paginators holding the whole set of results since we need to intersect them
 
         $coursePaginator = null;
         if ($filterByOrganizationId || $filterByLecturerId) {
@@ -76,7 +73,8 @@ final class CourseCollectionDataProvider extends AbstractController implements C
                     $intersection = array_uintersect($coursePaginator->getItems(), $coursesByPersonPaginator->getItems(),
                         'Dbp\Relay\BaseCourseBundle\DataProvider\CourseCollectionDataProvider::compareCourses');
                     $courses = array_values($intersection);
-                    $coursePaginator = $this->pagination->createWholeResultPaginator($courses, $resourceClass, $operationName, $context);
+                    Pagination::addPaginationOptions($options, $filters);
+                    $coursePaginator = Pagination::createWholeResultPaginator($courses, $options);
                 }
             }
         } else {

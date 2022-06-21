@@ -5,34 +5,32 @@ declare(strict_types=1);
 namespace Dbp\Relay\BaseCourseBundle\Controller;
 
 use Dbp\Relay\BaseCourseBundle\API\CourseProviderInterface;
-use Dbp\Relay\CoreBundle\Helpers\ArrayFullPaginator;
+use Dbp\Relay\CoreBundle\Pagination\Pagination;
+use Dbp\Relay\CoreBundle\Pagination\Paginator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 
 class GetAttendeesByCourse extends AbstractController
 {
-    public const ITEMS_PER_PAGE = 250;
+    public const MAX_ITEMS_PER_PAGE = 250;
 
-    protected $coursesProvider;
+    /** @var CourseProviderInterface */
+    private $coursesProvider;
 
     public function __construct(CourseProviderInterface $coursesProvider)
     {
         $this->coursesProvider = $coursesProvider;
     }
 
-    public function __invoke(string $identifier, Request $request): ArrayFullPaginator
+    public function __invoke(string $identifier, Request $request): Paginator
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
-        $page = (int) $request->query->get('page', 1);
-        $perPage = (int) $request->query->get('perPage', self::ITEMS_PER_PAGE);
-
         $options = [];
-        $lang = $request->query->get('lang', 'de');
-        $options['lang'] = $lang;
+        $options['lang'] = $request->query->get('lang', 'de');
 
-        $courses = $this->coursesProvider->getAttendeesByCourse($identifier, $options);
+        Pagination::addPaginationOptions($options, $request->query->all(), self::MAX_ITEMS_PER_PAGE);
 
-        return new ArrayFullPaginator($courses, $page, $perPage);
+        return $this->coursesProvider->getAttendeesByCourse($identifier, $options);
     }
 }
