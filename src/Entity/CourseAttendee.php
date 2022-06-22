@@ -36,7 +36,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *                 "parameters" = {
  *                     {"name" = "identifier", "in" = "path", "description" = "Resource identifier", "required" = true, "type" = "string", "example" = "257571"},
  *                     {"name" = "lang", "in" = "query", "description" = "Language of result", "type" = "string", "enum" = {"de", "en"}, "example" = "de"},
- *                     {"name" = "partial", "in" = "query", "description" = "Enable partial pagination", "type" = "bool", "example" = "false"}
+ *                     {"name" = "partialPagination", "in" = "query", "description" = "Enable partial pagination", "type" = "bool", "example" = "false"}
  *                 }
  *             }
  *         }
