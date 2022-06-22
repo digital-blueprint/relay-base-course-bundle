@@ -53,8 +53,6 @@ final class CourseCollectionDataProvider extends AbstractController implements C
         $filterByOrganizationId = $organizationId !== '';
         $filterByLecturerId = $lecturerId !== '';
 
-        dump($context);
-
         if (!($filterByOrganizationId && $filterByLecturerId)) {
             Pagination::addPaginationOptions($options, $filters);
         } // else (both filters provided) -> request paginators holding the whole set of results since we need to intersect them
