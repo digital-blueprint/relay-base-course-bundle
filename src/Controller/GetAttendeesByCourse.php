@@ -27,7 +27,7 @@ class GetAttendeesByCourse extends AbstractController
         $options = [];
         $options['lang'] = $request->query->get('lang', 'de');
 
-        Pagination::addPaginationOptions($options, $request->query->all());
+        Pagination::addOptions($options, $request->query->all());
 
         return $this->coursesProvider->getAttendeesByCourse($identifier, $options);
     }

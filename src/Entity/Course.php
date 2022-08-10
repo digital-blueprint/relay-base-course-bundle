@@ -20,9 +20,7 @@ use Dbp\Relay\CoreBundle\LocalData\LocalDataAwareTrait;
  *                 "parameters" = {
  *                     {"name" = "search", "in" = "query", "description" = "Search for a course", "type" = "string", "required" = false},
  *                     {"name" = "lang", "in" = "query", "description" = "Language of result", "type" = "string", "enum" = {"de", "en"}, "example" = "de"},
- *                     {"name" = "term", "in" = "query", "description" = "Teaching term", "type" = "string", "enum" = {"W", "S"}, "example" = "W"},
- *                     {"name" = "organization", "in" = "query", "description" = "Get courses of an organization (ID of BaseOrganization resource)", "required" = false, "type" = "string", "example" = "1190"},
- *                     {"name" = "lecturer", "in" = "query", "description" = "Get courses of a lecturer (ID of BasePerson resource)", "required" = false, "type" = "string", "example" = "woody007"},
+ *                     {"name" = "queryLocal", "in" = "query", "description" = "Local query parameters to apply", "type" = "string"},
  *                     {"name" = "includeLocal", "in" = "query", "description" = "Local data attributes to include", "type" = "string", "example" = "BaseCourse.code,BaseCourse.numberOfCredits"},
  *                     {"name" = "partialPagination", "in" = "query", "description" = "Enable partial pagination", "type" = "bool", "example" = "false"}
  *                 }

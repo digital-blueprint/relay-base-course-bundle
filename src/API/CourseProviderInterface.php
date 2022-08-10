@@ -23,15 +23,5 @@ interface CourseProviderInterface
     /**
      * @throws ApiError
      */
-    public function getCoursesByOrganization(string $orgUnitId, array $options = []): Paginator;
-
-    /**
-     * @throws ApiError
-     */
-    public function getCoursesByLecturer(string $lecturerId, array $options = []): Paginator;
-
-    /**
-     * @throws ApiError
-     */
     public function getAttendeesByCourse(string $courseId, array $options = []): Paginator;
 }

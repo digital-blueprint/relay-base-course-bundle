@@ -39,57 +39,9 @@ final class CourseCollectionDataProvider extends AbstractController implements C
             $options['search'] = $search;
         }
 
-        if ($term = ($filters['term'] ?? null)) {
-            $options['term'] = $term;
-        }
+        LocalData::addOptions($options, $filters);
+        Pagination::addOptions($options, $filters);
 
-        if ($includeParameter = LocalData::getIncludeParameter($filters)) {
-            $options[LocalData::INCLUDE_PARAMETER_NAME] = $includeParameter;
-        }
-
-        $organizationId = $filters['organization'] ?? '';
-        $lecturerId = $filters['lecturer'] ?? '';
-
-        $filterByOrganizationId = $organizationId !== '';
-        $filterByLecturerId = $lecturerId !== '';
-
-        if (!($filterByOrganizationId && $filterByLecturerId)) {
-            Pagination::addPaginationOptions($options, $filters);
-        } // else (both filters provided) -> request paginators holding the whole set of results since we need to intersect them
-
-        $coursePaginator = null;
-        if ($filterByOrganizationId || $filterByLecturerId) {
-            if ($filterByOrganizationId) {
-                $coursePaginator = $this->courseProvider->getCoursesByOrganization($organizationId, $options);
-            }
-            if ($filterByLecturerId) {
-                $coursesByPersonPaginator = $this->courseProvider->getCoursesByLecturer($lecturerId, $options);
-
-                if (!$filterByOrganizationId) {
-                    $coursePaginator = $coursesByPersonPaginator;
-                } else {
-                    $intersection = array_uintersect($coursePaginator->getItems(), $coursesByPersonPaginator->getItems(),
-                        'Dbp\Relay\BaseCourseBundle\DataProvider\CourseCollectionDataProvider::compareCourses');
-                    $courses = array_values($intersection);
-                    Pagination::addPaginationOptions($options, $filters);
-                    $coursePaginator = Pagination::createWholeResultPaginator($courses, $options);
-                }
-            }
-        } else {
-            $coursePaginator = $this->courseProvider->getCourses($options);
-        }
-
-        return $coursePaginator ?? [];
-    }
-
-    public static function compareCourses(Course $a, Course $b): int
-    {
-        if ($a->getIdentifier() > $b->getIdentifier()) {
-            return 1;
-        } elseif ($a->getIdentifier() === $b->getIdentifier()) {
-            return 0;
-        } else {
-            return -1;
-        }
+        return $this->courseProvider->getCourses($options);
     }
 }
