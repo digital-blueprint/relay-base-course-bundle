@@ -18,7 +18,7 @@ use Dbp\Relay\CoreBundle\LocalData\LocalDataAwareTrait;
  *             "openapi_context" = {
  *                 "tags" = {"BaseCourse"},
  *                 "parameters" = {
- *                     {"name" = "search", "in" = "query", "description" = "Search for a course", "type" = "string", "required" = false},
+ *                     {"name" = "search", "in" = "query", "description" = "Search filter (partial, case-insensitive text search on 'name' attribute)", "type" = "string", "required" = false},
  *                     {"name" = "lang", "in" = "query", "description" = "Language of result", "type" = "string", "enum" = {"de", "en"}, "example" = "de"},
  *                     {"name" = "queryLocal", "in" = "query", "description" = "Local query parameters to apply", "type" = "string"},
  *                     {"name" = "includeLocal", "in" = "query", "description" = "Local data attributes to include", "type" = "string", "example" = "BaseCourse.code,BaseCourse.numberOfCredits"},
