@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace Dbp\Relay\BaseCourseBundle\Entity;
 
 use ApiPlatform\Core\Annotation\ApiProperty;
-use ApiPlatform\Core\Annotation\ApiResource;
 use Dbp\Relay\BaseCourseBundle\Controller\GetAttendeesByCourse;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ApiResource(
+ * Currently disabled:
+ * ApiResource(
  *     collectionOperations={
  *         "get" = {
  *             "path" = "/course_attendees",
@@ -57,7 +57,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *         "groups" = {"CourseAttendee:output"},
  *         "jsonld_embed_context" = true,
  *     }
- * )
+ * ).
  */
 class CourseAttendee
 {
