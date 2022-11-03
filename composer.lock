@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f2b6220bd46c3a92db57fed7c556fcf1",
+    "content-hash": "98726ee759d17906d5893bb18393ae03",
     "packages": [
         {
             "name": "api-platform/core",
@@ -172,14 +172,8 @@
             "version": "v0.1.48",
             "source": {
                 "type": "git",
-                "url": "https://gitlab.tugraz.at/dbp/relay/dbp-relay-core-bundle.git",
+                "url": "git@gitlab.tugraz.at:dbp/relay/dbp-relay-core-bundle.git",
                 "reference": "022cfbb04346c7dbc0b988c61246d9f3ffa53b33"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://gitlab.tugraz.at/api/v4/projects/dbp%2Frelay%2Fdbp-relay-core-bundle/repository/archive.zip?sha=022cfbb04346c7dbc0b988c61246d9f3ffa53b33",
-                "reference": "022cfbb04346c7dbc0b988c61246d9f3ffa53b33",
-                "shasum": ""
             },
             "require": {
                 "api-platform/core": "^2.6.8 <2.7.0",
@@ -277,10 +271,6 @@
                 "AGPL-3.0-or-later"
             ],
             "description": "The core bundle of the Relay API gateway",
-            "support": {
-                "source": "https://gitlab.tugraz.at/dbp/relay/dbp-relay-core-bundle/-/tree/v0.1.48",
-                "issues": "https://gitlab.tugraz.at/dbp/relay/dbp-relay-core-bundle/-/issues"
-            },
             "time": "2022-10-27T10:18:30+02:00"
         },
         {
