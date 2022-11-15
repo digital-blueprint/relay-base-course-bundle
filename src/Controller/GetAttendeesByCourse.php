@@ -38,7 +38,7 @@ class GetAttendeesByCourse extends AbstractController
         $maxNumItemsPerPage = Pagination::getMaxNumItemsPerPage($query);
 
         return new PartialPaginator($this->coursesProvider->getAttendeesByCourse($identifier,
-            Pagination::getCurrentPageNumber($query), Pagination::getMaxNumItemsPerPage($query), $options),
+            $currentPageNumber, $maxNumItemsPerPage, $options),
             $currentPageNumber, $maxNumItemsPerPage);
     }
 }
