@@ -7,17 +7,14 @@ namespace Dbp\Relay\BaseCourseBundle\DataProvider;
 use Dbp\Relay\BaseCourseBundle\API\CourseProviderInterface;
 use Dbp\Relay\BaseCourseBundle\Entity\Course;
 use Dbp\Relay\CoreBundle\DataProvider\AbstractDataProvider;
-use Symfony\Component\HttpFoundation\RequestStack;
 
 class CourseDataProvider extends AbstractDataProvider
 {
     /** @var CourseProviderInterface */
     private $courseProvider;
 
-    public function __construct(CourseProviderInterface $courseProvider, RequestStack $requestStack)
+    public function __construct(CourseProviderInterface $courseProvider)
     {
-        parent::__construct($requestStack);
-
         $this->courseProvider = $courseProvider;
     }
 
@@ -37,11 +34,6 @@ class CourseDataProvider extends AbstractDataProvider
             $options['search'] = $search;
         }
 
-        // TODO: change getCourses to accept $currentPageNumber and $maxNumItemsPerPage as arguments and return page items as array
-        $options['page'] = $currentPageNumber;
-        $options['perPage'] = $maxNumItemsPerPage;
-        $options['partialPagination'] = true;
-
-        return $this->courseProvider->getCourses($options)->getItems();
+        return $this->courseProvider->getCourses($currentPageNumber, $maxNumItemsPerPage, $options);
     }
 }

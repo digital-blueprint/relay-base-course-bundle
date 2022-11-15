@@ -7,8 +7,6 @@ namespace Dbp\Relay\BaseCourseBundle\Service;
 use Dbp\Relay\BaseCourseBundle\API\CourseProviderInterface;
 use Dbp\Relay\BaseCourseBundle\Entity\Course;
 use Dbp\Relay\BaseCourseBundle\Entity\CourseAttendee;
-use Dbp\Relay\CoreBundle\Pagination\FullPaginator;
-use Dbp\Relay\CoreBundle\Pagination\Paginator;
 
 class DummyCourseProvider implements CourseProviderInterface
 {
@@ -21,20 +19,12 @@ class DummyCourseProvider implements CourseProviderInterface
         return $course;
     }
 
-    public function getCourses(array $options = []): Paginator
+    public function getCourses(int $currentPageNumber, int $maxNumItemsPerPage, array $options = []): array
     {
-        $courses = [];
-        $courses[] = $this->getCourseById('123', $options);
-
-        return new FullPaginator($courses, 1, count($courses), count($courses));
+        return [$this->getCourseById('123', $options)];
     }
 
-    public function getCoursesByOrganization(string $orgUnitId, array $options = []): Paginator
-    {
-        return $this->getCourses($options);
-    }
-
-    public function getAttendeesByCourse(string $courseId, array $options = []): Paginator
+    public function getAttendeesByCourse(string $courseId, int $currentPageNumber, int $maxNumItemsPerPage, array $options = []): array
     {
         $attendee = new CourseAttendee();
         $attendee->setIdentifier('aeinstein');
@@ -42,11 +32,6 @@ class DummyCourseProvider implements CourseProviderInterface
         $attendee->setFamilyName('Einstein');
         $attendee->setEmail('info@einstein.com');
 
-        return new FullPaginator($attendees = [$attendee], 1, count($attendees), count($attendees));
-    }
-
-    public function getCoursesByLecturer(string $lecturerId, array $options = []): Paginator
-    {
-        return $this->getCourses($options);
+        return [$attendee];
     }
 }
