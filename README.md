@@ -1,5 +1,5 @@
 # DbpRelayBaseCourseBundle
-[GitLab](https://gitlab.tugraz.at/dbp/relay/dbp-relay-base-course-bundle)
+[GitLab](https://github.com/digital-blueprint/relay-base-course-bundle)
 
 Base Symfony bundle for courses for the DBP Relay API Server.
 
@@ -25,7 +25,7 @@ Dbp\Relay\BasePersonBundle\DbpRelayBaseCourseBundle::class => ['all' => true],
 ## Course provider implementation
 
 For this bundle to work you need to add a service that implements the
-[CourseProviderInterface](https://gitlab.tugraz.at/dbp/relay/dbp-relay-base-course-bundle/-/blob/main/src/API/CourseProviderInterface.php)
+[CourseProviderInterface](https://github.com/digital-blueprint/relay-base-course-bundle/-/blob/main/src/API/CourseProviderInterface.php)
 to your application.
 
 ### Example
