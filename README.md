@@ -9,7 +9,7 @@ Base Symfony bundle for courses for the DBP Relay API Server.
 
 * Add the bundle package as a dependency:
 
-```
+```bash
 composer require dbp/relay-base-course-bundle
 ```
 
