@@ -1,6 +1,7 @@
 # DbpRelayBaseCourseBundle
 [GitLab](https://gitlab.tugraz.at/dbp/relay/dbp-relay-base-course-bundle)
 
+Base Symfony bundle for courses for the DBP Relay API Server.
 
 ## Integration into the Relay API Server
 
