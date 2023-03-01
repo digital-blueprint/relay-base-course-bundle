@@ -3,6 +3,8 @@
 [GitHub](https://github.com/digital-blueprint/relay-base-course-bundle) |
 [Packagist](https://packagist.org/packages/dbp/relay-base-course-bundle)
 
+[![Test](https://github.com/digital-blueprint/relay-base-course-bundle/actions/workflows/test.yml/badge.svg)](https://github.com/digital-blueprint/relay-base-course-bundle/actions/workflows/test.yml)
+
 Base Symfony bundle for courses for the DBP Relay API Server.
 
 ## Integration into the Relay API Server
