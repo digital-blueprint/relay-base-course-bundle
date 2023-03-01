@@ -1,5 +1,7 @@
 # DbpRelayBaseCourseBundle
-[GitLab](https://github.com/digital-blueprint/relay-base-course-bundle)
+
+[GitHub](https://github.com/digital-blueprint/relay-base-course-bundle) |
+[Packagist](https://packagist.org/packages/dbp/relay-base-course-bundle)
 
 Base Symfony bundle for courses for the DBP Relay API Server.
 
