@@ -19,8 +19,8 @@ use Dbp\Relay\CoreBundle\LocalData\LocalDataAwareTrait;
  *                 "tags" = {"BaseCourse"},
  *                 "parameters" = {
  *                     {"name" = "search", "in" = "query", "description" = "Search filter (partial, case-insensitive text search on 'name' attribute)", "type" = "string", "required" = false},
- *                     {"name" = "queryLocal", "in" = "query", "description" = "Local query parameters to apply", "type" = "string", "example" = "term:W"},
- *                     {"name" = "includeLocal", "in" = "query", "description" = "Local data attributes to include", "type" = "string", "example" = "code,numberOfCredits"}
+ *                     {"name" = "queryLocal", "in" = "query", "description" = "Local query parameters to apply", "type" = "string"},
+ *                     {"name" = "includeLocal", "in" = "query", "description" = "Local data attributes to include", "type" = "string"}
  *                 }
  *             }
  *         }
@@ -33,7 +33,7 @@ use Dbp\Relay\CoreBundle\LocalData\LocalDataAwareTrait;
  *                 "tags" = {"BaseCourse"},
  *                 "parameters" = {
  *                     {"name" = "identifier", "in" = "path", "description" = "Resource identifier", "required" = true, "type" = "string", "example" = "257571"},
- *                     {"name" = "includeLocal", "in" = "query", "description" = "Local data attributes to include", "type" = "string", "example" = "code,numberOfCredits"}
+ *                     {"name" = "includeLocal", "in" = "query", "description" = "Local data attributes to include", "type" = "string"}
  *                 }
  *             }
  *         }

@@ -6,7 +6,7 @@
         "php": ">=7.3",
         "ext-json": "*",
         "api-platform/core": "^2.6.8",
-        "dbp/relay-core-bundle": "^0.1.48",
+        "dbp/relay-core-bundle": "^0.1.91",
         "symfony/config": "^5.4",
         "symfony/framework-bundle": "^5.4",
         "symfony/yaml": "^5.4"
@@ -22,12 +22,6 @@
         "symfony/phpunit-bridge": "^5.4.14",
         "vimeo/psalm": "^4.29"
     },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "git@gitlab.tugraz.at:dbp/relay/dbp-relay-base-person-bundle.git"
-        }
-    ],
     "autoload": {
         "psr-4": {
             "Dbp\\Relay\\BaseCourseBundle\\": "src/"
