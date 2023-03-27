@@ -11,6 +11,7 @@ trait CourseTrait
 {
     /**
      * @ApiProperty(identifier=true)
+     * @Groups({"BaseCourse:output"})
      */
     private $identifier;
 
