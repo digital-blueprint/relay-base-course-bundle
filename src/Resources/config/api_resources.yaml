@@ -16,7 +16,7 @@ resources:
               in: query
               description: 'Local data attributes to include'
               type: string
-              example: 'code'
+
       ApiPlatform\Metadata\GetCollection:
         provider: Dbp\Relay\BaseCourseBundle\DataProvider\CourseDataProvider
         uriTemplate: '/base/courses'
