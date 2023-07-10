@@ -6,7 +6,7 @@ namespace Dbp\Relay\BaseCourseBundle\DataProvider;
 
 use Dbp\Relay\BaseCourseBundle\API\CourseProviderInterface;
 use Dbp\Relay\BaseCourseBundle\Entity\Course;
-use Dbp\Relay\CoreBundle\DataProvider\AbstractDataProvider;
+use Dbp\Relay\CoreBundle\Rest\AbstractDataProvider;
 
 class CourseDataProvider extends AbstractDataProvider
 {
@@ -15,28 +15,25 @@ class CourseDataProvider extends AbstractDataProvider
 
     public function __construct(CourseProviderInterface $courseProvider)
     {
-        $this->courseProvider = $courseProvider;
-    }
+        parent::__construct();
 
-    protected function getResourceClass(): string
-    {
-        return Course::class;
+        $this->courseProvider = $courseProvider;
     }
 
     protected function isUserGrantedOperationAccess(int $operation): bool
     {
-        return $this->isUserAuthenticated();
+        return $this->isAuthenticated();
     }
 
-    protected function getItemById($id, array $filters = [], array $options = []): object
+    protected function getItemById(string $id, array $filters = [], array $options = []): ?object
     {
         return $this->courseProvider->getCourseById($id, $options);
     }
 
     protected function getPage(int $currentPageNumber, int $maxNumItemsPerPage, array $filters = [], array $options = []): array
     {
-        if ($search = ($filters['search'] ?? null)) {
-            $options['search'] = $search;
+        if ($search = ($filters[Course::SEARCH_PARAMETER_NAME] ?? null)) {
+            $options[Course::SEARCH_PARAMETER_NAME] = $search;
         }
 
         return $this->courseProvider->getCourses($currentPageNumber, $maxNumItemsPerPage, $options);

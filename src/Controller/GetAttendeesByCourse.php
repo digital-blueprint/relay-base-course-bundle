@@ -6,9 +6,9 @@ namespace Dbp\Relay\BaseCourseBundle\Controller;
 
 use Dbp\Relay\BaseCourseBundle\API\CourseProviderInterface;
 use Dbp\Relay\CoreBundle\Locale\Locale;
-use Dbp\Relay\CoreBundle\Pagination\Pagination;
-use Dbp\Relay\CoreBundle\Pagination\Paginator;
-use Dbp\Relay\CoreBundle\Pagination\PartialPaginator;
+use Dbp\Relay\CoreBundle\Rest\Options;
+use Dbp\Relay\CoreBundle\Rest\Query\Pagination\Pagination;
+use Dbp\Relay\CoreBundle\Rest\Query\Pagination\PartialPaginator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -26,12 +26,12 @@ class GetAttendeesByCourse extends AbstractController
         $this->locale = $locale;
     }
 
-    public function __invoke(string $identifier, Request $request): Paginator
+    public function __invoke(string $identifier, Request $request): PartialPaginator
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
         $options = [];
-        $options[Locale::LANGUAGE_OPTION] = $this->locale->getCurrentPrimaryLanguage();
+        $options[Options::LANGUAGE] = $this->locale->getCurrentPrimaryLanguage();
 
         $query = $request->query->all();
         $currentPageNumber = Pagination::getCurrentPageNumber($query);
