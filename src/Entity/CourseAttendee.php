@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Dbp\Relay\BaseCourseBundle\Entity;
 
-use ApiPlatform\Core\Annotation\ApiProperty;
 use Dbp\Relay\BaseCourseBundle\Controller\GetAttendeesByCourse;
 use Symfony\Component\Serializer\Annotation\Groups;
 
@@ -60,7 +59,8 @@ use Symfony\Component\Serializer\Annotation\Groups;
 class CourseAttendee
 {
     /**
-     * @ApiProperty(identifier=true)
+     * ApiProperty(identifier=true).
+     *
      * @Groups({"CourseAttendee:output"})
      *
      * @var string
@@ -68,7 +68,8 @@ class CourseAttendee
     private $identifier;
 
     /**
-     * @ApiProperty(iri="http://schema.org/givenName")
+     * ApiProperty(iri="http://schema.org/givenName").
+     *
      * @Groups({"CourseAttendee:output"})
      *
      * @var string
@@ -76,8 +77,8 @@ class CourseAttendee
     private $givenName;
 
     /**
-     * @var string
-     * @ApiProperty(iri="http://schema.org/familyName")
+     * ApiProperty(iri="http://schema.org/familyName").
+     *
      * @Groups({"CourseAttendee:output"})
      *
      * @var string
@@ -85,7 +86,8 @@ class CourseAttendee
     private $familyName;
 
     /**
-     * @ApiProperty(iri="http://schema.org/email")
+     * ApiProperty(iri="http://schema.org/email").
+     *
      * @Groups({"CourseAttendee:output"})
      *
      * @var string

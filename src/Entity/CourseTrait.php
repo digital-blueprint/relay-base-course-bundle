@@ -4,19 +4,16 @@ declare(strict_types=1);
 
 namespace Dbp\Relay\BaseCourseBundle\Entity;
 
-use ApiPlatform\Core\Annotation\ApiProperty;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 trait CourseTrait
 {
     /**
-     * @ApiProperty(identifier=true)
      * @Groups({"BaseCourse:output"})
      */
     private $identifier;
 
     /**
-     * @ApiProperty(iri="https://schema.org/name")
      * @Groups({"BaseCourse:output"})
      *
      * @var string
@@ -24,7 +21,6 @@ trait CourseTrait
     private $name;
 
     /**
-     * @ApiProperty
      * @Groups({"BaseCourse:output"})
      *
      * @var string
