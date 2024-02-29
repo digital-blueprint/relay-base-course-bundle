@@ -8,6 +8,9 @@ use Dbp\Relay\BaseCourseBundle\API\CourseProviderInterface;
 use Dbp\Relay\BaseCourseBundle\Entity\Course;
 use Dbp\Relay\CoreBundle\Rest\AbstractDataProvider;
 
+/**
+ * @extends AbstractDataProvider<Course>
+ */
 class CourseDataProvider extends AbstractDataProvider
 {
     /** @var CourseProviderInterface */
