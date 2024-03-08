@@ -14,7 +14,7 @@ class DbpRelayBaseCourseExtension extends ConfigurableExtension
 {
     use ExtensionTrait;
 
-    public function loadInternal(array $mergedConfig, ContainerBuilder $container)
+    public function loadInternal(array $mergedConfig, ContainerBuilder $container): void
     {
         $this->addResourceClassDirectory($container, __DIR__.'/../Entity');
 
