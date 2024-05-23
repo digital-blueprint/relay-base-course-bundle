@@ -8,23 +8,19 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 trait CourseTrait
 {
-    /**
-     * @Groups({"BaseCourse:output"})
-     */
+    #[Groups(['BaseCourse:output'])]
     private $identifier;
 
     /**
-     * @Groups({"BaseCourse:output"})
-     *
      * @var string
      */
+    #[Groups(['BaseCourse:output'])]
     private $name;
 
     /**
-     * @Groups({"BaseCourse:output"})
-     *
      * @var string
      */
+    #[Groups(['BaseCourse:output'])]
     private $type;
 
     public function getIdentifier(): string

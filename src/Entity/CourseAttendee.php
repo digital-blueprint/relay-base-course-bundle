@@ -61,37 +61,33 @@ class CourseAttendee
     /**
      * ApiProperty(identifier=true).
      *
-     * @Groups({"CourseAttendee:output"})
-     *
      * @var string
      */
+    #[Groups(['CourseAttendee:output'])]
     private $identifier;
 
     /**
      * ApiProperty(iri="http://schema.org/givenName").
      *
-     * @Groups({"CourseAttendee:output"})
-     *
      * @var string
      */
+    #[Groups(['CourseAttendee:output'])]
     private $givenName;
 
     /**
      * ApiProperty(iri="http://schema.org/familyName").
      *
-     * @Groups({"CourseAttendee:output"})
-     *
      * @var string
      */
+    #[Groups(['CourseAttendee:output'])]
     private $familyName;
 
     /**
      * ApiProperty(iri="http://schema.org/email").
      *
-     * @Groups({"CourseAttendee:output"})
-     *
      * @var string
      */
+    #[Groups(['CourseAttendee:output'])]
     private $email;
 
     public function setIdentifier(string $identifier): void
