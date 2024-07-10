@@ -1,8 +1,4 @@
 services:
-  Dbp\Relay\BaseCourseBundle\Controller\GetAttendeesByCourse:
-    autoconfigure: true
-    autowire: true
-
   Dbp\Relay\BaseCourseBundle\DataProvider\CourseDataProvider:
     autowire: true
     autoconfigure: true
