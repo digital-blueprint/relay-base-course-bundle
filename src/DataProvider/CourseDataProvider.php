@@ -13,8 +13,7 @@ use Dbp\Relay\CoreBundle\Rest\AbstractDataProvider;
  */
 class CourseDataProvider extends AbstractDataProvider
 {
-    /** @var CourseProviderInterface */
-    private $courseProvider;
+    private CourseProviderInterface $courseProvider;
 
     public function __construct(CourseProviderInterface $courseProvider)
     {

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Dbp\Relay\BaseCourseBundle\DependencyInjection;
 
+use Dbp\Relay\BaseCourseBundle\DataProvider\CourseDataProvider;
 use Dbp\Relay\CoreBundle\Extension\ExtensionTrait;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -18,13 +19,13 @@ class DbpRelayBaseCourseExtension extends ConfigurableExtension
     {
         $this->addResourceClassDirectory($container, __DIR__.'/../Entity');
 
-        $this->addPathToHide($container, '/course_attendees');
-        $this->addPathToHide($container, '/course_attendees/{identifier}');
-
         $loader = new YamlFileLoader(
             $container,
             new FileLocator(__DIR__.'/../Resources/config')
         );
         $loader->load('services.yaml');
+
+        $defintion = $container->getDefinition(CourseDataProvider::class);
+        $defintion->addMethodCall('setConfig', [$mergedConfig]);
     }
 }
