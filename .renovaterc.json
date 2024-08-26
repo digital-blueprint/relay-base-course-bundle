@@ -11,5 +11,9 @@
     "enabled": true
   },
   "packageRules": [
+    {
+      "matchPackagePrefixes": ["symfony/"],
+      "allowedVersions": "<7"
+    }
   ]
 }
