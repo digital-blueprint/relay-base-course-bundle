@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+* Drop support for Symfony 5
+
 ## v0.2.12
 
 * Modernize code
