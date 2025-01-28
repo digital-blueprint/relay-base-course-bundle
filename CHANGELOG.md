@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## v0.2.13
+
 * Add course code
 * Drop support for Symfony 5
 
