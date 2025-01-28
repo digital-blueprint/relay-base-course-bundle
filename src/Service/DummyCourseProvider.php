@@ -15,6 +15,7 @@ class DummyCourseProvider implements CourseProviderInterface
         if ($identifier !== '404') {
             $course = new Course();
             $course->setIdentifier($identifier);
+            $course->setCode('C0815');
             $course->setName('Field Theory');
         }
 

@@ -19,6 +19,9 @@ class Course implements LocalDataAwareInterface, NamedEntityInterface
     private ?string $identifier = null;
 
     #[Groups(['BaseCourse:output'])]
+    private ?string $code = null;
+
+    #[Groups(['BaseCourse:output'])]
     private ?string $name = null;
 
     public function getIdentifier(): ?string
@@ -29,6 +32,16 @@ class Course implements LocalDataAwareInterface, NamedEntityInterface
     public function setIdentifier(?string $identifier): void
     {
         $this->identifier = $identifier;
+    }
+
+    public function getCode(): ?string
+    {
+        return $this->code;
+    }
+
+    public function setCode(?string $code): void
+    {
+        $this->code = $code;
     }
 
     public function getName(): ?string
