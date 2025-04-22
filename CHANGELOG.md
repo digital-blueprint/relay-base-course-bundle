@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## v0.2.14
+
 * Add support for api-platform 4.1
 
 ## v0.2.13
