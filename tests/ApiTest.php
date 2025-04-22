@@ -4,50 +4,36 @@ declare(strict_types=1);
 
 namespace Dbp\Relay\BaseCourseBundle\Tests;
 
-use ApiPlatform\Symfony\Bundle\Test\ApiTestCase;
+use Dbp\Relay\CoreBundle\TestUtils\AbstractApiTest;
 use Dbp\Relay\CoreBundle\TestUtils\UserAuthTrait;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 
-class ApiTest extends ApiTestCase
+class ApiTest extends AbstractApiTest
 {
     use UserAuthTrait;
 
     public function testCoursesNoAuth(): void
     {
-        $this->testRequest('/base/courses', false, Response::HTTP_UNAUTHORIZED);
+        $this->assertEquals(Response::HTTP_UNAUTHORIZED, $this->testClient->get('/base/courses', token: null)->getStatusCode());
     }
 
     public function testCourseNoAuth(): void
     {
-        $this->testRequest('/base/courses/foo', false, Response::HTTP_UNAUTHORIZED);
+        $this->assertEquals(Response::HTTP_UNAUTHORIZED, $this->testClient->get('/base/courses/foo', token: null)->getStatusCode());
     }
 
     public function testGetItemAuthenticated(): void
     {
-        $this->testRequest('/base/courses/foo', true, Response::HTTP_OK);
+        $this->assertEquals(Response::HTTP_OK, $this->testClient->get('/base/courses/foo')->getStatusCode());
     }
 
     public function testGetItemNotFound(): void
     {
-        $this->testRequest('/base/courses/404', true, Response::HTTP_NOT_FOUND);
+        $this->assertEquals(Response::HTTP_NOT_FOUND, $this->testClient->get('/base/courses/404')->getStatusCode());
     }
 
     public function testGetCollectionAuthenticated(): void
     {
-        $this->testRequest('/base/courses', true, Response::HTTP_OK);
-    }
-
-    private function testRequest(string $url, bool $authenticated, int $expectedStatusCode): void
-    {
-        try {
-            $client = $this->withUser('user', [], $authenticated ? '42' : null);
-            $response = $client->request('GET', $url, ['headers' => [
-                'Authorization' => 'Bearer 42',
-            ]]);
-            $this->assertEquals($expectedStatusCode, $response->getStatusCode());
-        } catch (TransportExceptionInterface $e) {
-            throw new \RuntimeException($e->getMessage());
-        }
+        $this->assertEquals(Response::HTTP_OK, $this->testClient->get('/base/courses')->getStatusCode());
     }
 }

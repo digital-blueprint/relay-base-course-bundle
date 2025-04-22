@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+* Add support for api-platform 4.1
+
 ## v0.2.13
 
 * Add course code
