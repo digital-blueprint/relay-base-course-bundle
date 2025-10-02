@@ -54,6 +54,18 @@ use Symfony\Component\Serializer\Annotation\Groups;
                         required: false,
                         schema: ['type' => 'string'],
                     ),
+                    new Parameter(
+                        name: 'filter',
+                        in: 'query',
+                        schema: [
+                            'type' => 'object',
+                            'additionalProperties' => [
+                                'type' => 'string',
+                            ],
+                        ],
+                        style: 'form',
+                        explode: true
+                    ),
                 ]
             ),
             provider: CourseDataProvider::class

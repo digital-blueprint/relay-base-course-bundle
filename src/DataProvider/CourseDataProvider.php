@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Dbp\Relay\BaseCourseBundle\DataProvider;
 
 use Dbp\Relay\BaseCourseBundle\API\CourseProviderInterface;
+use Dbp\Relay\BaseCourseBundle\DependencyInjection\Configuration;
 use Dbp\Relay\BaseCourseBundle\Entity\Course;
 use Dbp\Relay\CoreBundle\Rest\AbstractDataProvider;
 
@@ -13,18 +14,9 @@ use Dbp\Relay\CoreBundle\Rest\AbstractDataProvider;
  */
 class CourseDataProvider extends AbstractDataProvider
 {
-    private CourseProviderInterface $courseProvider;
-
-    public function __construct(CourseProviderInterface $courseProvider)
+    public function __construct(private readonly CourseProviderInterface $courseProvider)
     {
         parent::__construct();
-
-        $this->courseProvider = $courseProvider;
-    }
-
-    protected function isUserGrantedOperationAccess(int $operation): bool
-    {
-        return $this->isAuthenticated();
     }
 
     protected function getItemById(string $id, array $filters = [], array $options = []): ?object
@@ -39,5 +31,10 @@ class CourseDataProvider extends AbstractDataProvider
         }
 
         return $this->courseProvider->getCourses($currentPageNumber, $maxNumItemsPerPage, $options);
+    }
+
+    protected function isCurrentUserGrantedOperationAccess(int $operation): bool
+    {
+        return $this->isGrantedRole(Configuration::ROLE_READER);
     }
 }

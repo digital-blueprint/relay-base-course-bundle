@@ -25,7 +25,7 @@ class DbpRelayBaseCourseExtension extends ConfigurableExtension
         );
         $loader->load('services.yaml');
 
-        $defintion = $container->getDefinition(CourseDataProvider::class);
-        $defintion->addMethodCall('setConfig', [$mergedConfig]);
+        $definition = $container->getDefinition(CourseDataProvider::class);
+        $definition->addMethodCall('setConfig', [$mergedConfig]);
     }
 }
