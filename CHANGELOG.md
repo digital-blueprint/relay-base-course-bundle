@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+## v0.2.16
+
+-  Add support for Symfony 7.4
+
 ## v0.2.15
 
 - Add ROLE_READER, which is required for read operations
