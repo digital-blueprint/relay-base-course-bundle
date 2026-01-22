@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Add CourseClass entity to represent a class, i.e., one specific instance of instruction within a course
+
 ## v0.2.16
 
 -  Add support for Symfony 7.4

@@ -3,6 +3,10 @@ services:
     autowire: true
     autoconfigure: true
 
+  Dbp\Relay\BaseCourseBundle\DataProvider\CourseClassDataProvider:
+    autowire: true
+    autoconfigure: true
+
   Dbp\Relay\BaseCourseBundle\Service\DummyCourseProvider:
     autowire: true
     autoconfigure: true
