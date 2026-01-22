@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Dbp\Relay\BaseCourseBundle\API;
 
 use Dbp\Relay\BaseCourseBundle\Entity\Course;
-use Dbp\Relay\BaseCourseBundle\Entity\CourseClass;
+use Dbp\Relay\BaseCourseBundle\Entity\CourseEvent;
 use Dbp\Relay\CoreBundle\Exception\ApiError;
 
 interface CourseProviderInterface
@@ -31,15 +31,15 @@ interface CourseProviderInterface
      */
     public function getCourses(int $currentPageNumber, int $maxNumItemsPerPage, array $options = []): array;
 
-    public function getCourseClassById(string $identifier, array $options = []): ?CourseClass;
+    public function getCourseEventById(string $identifier, array $options = []): ?CourseEvent;
 
     /**
      * @param array $options Available options:
      *                       * LocalData::INCLUDE_PARAMETER_NAME
      *
-     * @return CourseClass[]
+     * @return CourseEvent[]
      *
      * @throws ApiError
      */
-    public function getCourseClasses(int $currentPageNumber, int $maxNumItemsPerPage, array $options = []): array;
+    public function getCourseEvents(int $currentPageNumber, int $maxNumItemsPerPage, array $filters = [], array $options = []): array;
 }

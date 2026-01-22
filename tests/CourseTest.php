@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Dbp\Relay\BaseCourseBundle\Tests;
 
-use Dbp\Relay\BaseCourseBundle\DataProvider\CourseClassDataProvider;
 use Dbp\Relay\BaseCourseBundle\DataProvider\CourseDataProvider;
+use Dbp\Relay\BaseCourseBundle\DataProvider\CourseEventDataProvider;
 use Dbp\Relay\BaseCourseBundle\Entity\Course;
-use Dbp\Relay\BaseCourseBundle\Entity\CourseClass;
+use Dbp\Relay\BaseCourseBundle\Entity\CourseEvent;
 use Dbp\Relay\BaseCourseBundle\Service\DummyCourseProvider;
 use Dbp\Relay\CoreBundle\TestUtils\DataProviderTester;
 use PHPUnit\Framework\TestCase;
@@ -26,8 +26,8 @@ class CourseTest extends TestCase
         $this->courseDataProviderTester = DataProviderTester::create($courseDataProvider, Course::class);
         DataProviderTester::setUp($courseDataProvider, currentUserAttributes: ['MAY_READ' => true]);
         $courseDataProvider->setConfig(self::getCourseDataProviderConfig());
-        $courseDateDataProvider = new CourseClassDataProvider($courseProvider);
-        $this->courseDateDataProviderTester = DataProviderTester::create($courseDateDataProvider, CourseClass::class);
+        $courseDateDataProvider = new CourseEventDataProvider($courseProvider);
+        $this->courseDateDataProviderTester = DataProviderTester::create($courseDateDataProvider, CourseEvent::class);
         DataProviderTester::setUp($courseDateDataProvider, currentUserAttributes: ['MAY_READ' => true]);
         $courseDateDataProvider->setConfig(self::getCourseDataProviderConfig());
     }
@@ -49,22 +49,36 @@ class CourseTest extends TestCase
         $this->assertInstanceOf(Course::class, $courses[0]);
     }
 
-    public function testGetCourseClassById(): void
+    public function testGetCourseEventById(): void
     {
         $courseDate = $this->courseDateDataProviderTester->getItem('456');
-        $this->assertInstanceOf(CourseClass::class, $courseDate);
+        $this->assertInstanceOf(CourseEvent::class, $courseDate);
         $this->assertEquals('456', $courseDate->getIdentifier());
         $this->assertEquals('123', $courseDate->getCourseIdentifier());
         $this->assertEquals(new \DateTimeImmutable('2024-10-01'), $courseDate->getStartAt());
         $this->assertEquals(new \DateTimeImmutable('2024-12-15'), $courseDate->getEndAt());
     }
 
-    public function testGetGetCourseClasses(): void
+    public function testGetGetCourseEvents(): void
     {
         $courseDates = $this->courseDateDataProviderTester->getPage(1, 10);
         $this->assertIsArray($courseDates);
         $this->assertCount(1, $courseDates);
-        $this->assertInstanceOf(CourseClass::class, $courseDates[0]);
+        $this->assertInstanceOf(CourseEvent::class, $courseDates[0]);
+    }
+
+    public function testGetGetCourseEventsByCourseIdentifier(): void
+    {
+        $courseDates = $this->courseDateDataProviderTester->getPage(filters: [
+            'courseIdentifier' => 'foo',
+        ]);
+        $this->assertCount(1, $courseDates);
+        $courseDate = $courseDates[0];
+        $this->assertInstanceOf(CourseEvent::class, $courseDate);
+        $this->assertEquals('456', $courseDate->getIdentifier());
+        $this->assertEquals('foo', $courseDate->getCourseIdentifier());
+        $this->assertEquals(new \DateTimeImmutable('2024-10-01'), $courseDate->getStartAt());
+        $this->assertEquals(new \DateTimeImmutable('2024-12-15'), $courseDate->getEndAt());
     }
 
     protected static function getCourseDataProviderConfig(): array

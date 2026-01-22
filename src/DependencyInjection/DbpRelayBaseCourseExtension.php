@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Dbp\Relay\BaseCourseBundle\DependencyInjection;
 
-use Dbp\Relay\BaseCourseBundle\DataProvider\CourseClassDataProvider;
 use Dbp\Relay\BaseCourseBundle\DataProvider\CourseDataProvider;
+use Dbp\Relay\BaseCourseBundle\DataProvider\CourseEventDataProvider;
 use Dbp\Relay\CoreBundle\Extension\ExtensionTrait;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -29,7 +29,7 @@ class DbpRelayBaseCourseExtension extends ConfigurableExtension
         $definition = $container->getDefinition(CourseDataProvider::class);
         $definition->addMethodCall('setConfig', [$mergedConfig]);
 
-        $definition = $container->getDefinition(CourseClassDataProvider::class);
+        $definition = $container->getDefinition(CourseEventDataProvider::class);
         $definition->addMethodCall('setConfig', [$mergedConfig]);
     }
 }

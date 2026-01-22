@@ -27,22 +27,22 @@ class ApiTest extends AbstractApiTest
         $this->assertEquals(Response::HTTP_NOT_FOUND, $this->testClient->get('/base/courses/404')->getStatusCode());
     }
 
-    public function testGetCourseDateItemAuthenticated(): void
+    public function testGetCourseEventItemAuthenticated(): void
     {
         $this->testClient->setUpUser(userAttributes: ['MAY_READ' => true]);
-        $this->assertEquals(Response::HTTP_OK, $this->testClient->get('/base/course-dates/bar')->getStatusCode());
+        $this->assertEquals(Response::HTTP_OK, $this->testClient->get('/base/course-events/bar')->getStatusCode());
     }
 
-    public function testGetCourseDateCollectionAuthenticated(): void
+    public function testGetCourseEventCollectionAuthenticated(): void
     {
         $this->testClient->setUpUser(userAttributes: ['MAY_READ' => true]);
-        $this->assertEquals(Response::HTTP_OK, $this->testClient->get('/base/course-dates')->getStatusCode());
+        $this->assertEquals(Response::HTTP_OK, $this->testClient->get('/base/course-events')->getStatusCode());
     }
 
-    public function testGetCourseDateItemNotFound(): void
+    public function testGetCourseEventItemNotFound(): void
     {
         $this->testClient->setUpUser(userAttributes: ['MAY_READ' => true]);
-        $this->assertEquals(Response::HTTP_NOT_FOUND, $this->testClient->get('/base/course-dates/404')->getStatusCode());
+        $this->assertEquals(Response::HTTP_NOT_FOUND, $this->testClient->get('/base/course-events/404')->getStatusCode());
     }
 
     public function testUnauthorizedRequests()
@@ -70,8 +70,8 @@ class ApiTest extends AbstractApiTest
         return [
             '/base/courses',
             '/base/courses/foo',
-            '/base/course-dates',
-            '/base/course-dates/bar',
+            '/base/course-events',
+            '/base/course-events/bar',
         ];
     }
 }

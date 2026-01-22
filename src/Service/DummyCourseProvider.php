@@ -6,7 +6,7 @@ namespace Dbp\Relay\BaseCourseBundle\Service;
 
 use Dbp\Relay\BaseCourseBundle\API\CourseProviderInterface;
 use Dbp\Relay\BaseCourseBundle\Entity\Course;
-use Dbp\Relay\BaseCourseBundle\Entity\CourseClass;
+use Dbp\Relay\BaseCourseBundle\Entity\CourseEvent;
 
 class DummyCourseProvider implements CourseProviderInterface
 {
@@ -28,22 +28,30 @@ class DummyCourseProvider implements CourseProviderInterface
         return [$this->getCourseById('123', $options)];
     }
 
-    public function getCourseClassById(string $identifier, array $options = []): ?CourseClass
+    public function getCourseEventById(string $identifier, array $options = []): ?CourseEvent
     {
         $courseDate = null;
         if ($identifier !== '404') {
-            $courseDate = new CourseClass();
-            $courseDate->setIdentifier($identifier);
-            $courseDate->setCourseIdentifier('123');
-            $courseDate->setStartAt(new \DateTimeImmutable('2024-10-01'));
-            $courseDate->setEndAt(new \DateTimeImmutable('2024-12-15'));
+            $courseDate = $this->getEvent($identifier, '123');
         }
 
         return $courseDate;
     }
 
-    public function getCourseClasses(int $currentPageNumber, int $maxNumItemsPerPage, array $options = []): array
+    public function getCourseEvents(int $currentPageNumber, int $maxNumItemsPerPage,
+        array $filters = [], array $options = []): array
     {
-        return [$this->getCourseClassById('456', $options)];
+        return [$this->getEvent('456', $filters['courseIdentifier'] ?? '123')];
+    }
+
+    private function getEvent(string $identifier, string $courseIdentifier): CourseEvent
+    {
+        $courseDate = new CourseEvent();
+        $courseDate->setIdentifier($identifier);
+        $courseDate->setCourseIdentifier($courseIdentifier);
+        $courseDate->setStartAt(new \DateTimeImmutable('2024-10-01'));
+        $courseDate->setEndAt(new \DateTimeImmutable('2024-12-15'));
+
+        return $courseDate;
     }
 }

@@ -9,18 +9,17 @@ use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\OpenApi\Model\Operation;
 use ApiPlatform\OpenApi\Model\Parameter;
-use Dbp\Relay\BaseCourseBundle\DataProvider\CourseClassDataProvider;
-use Dbp\Relay\BaseCourseBundle\DataProvider\CourseDataProvider;
+use Dbp\Relay\BaseCourseBundle\DataProvider\CourseEventDataProvider;
 use Dbp\Relay\CoreBundle\LocalData\LocalDataAwareInterface;
 use Dbp\Relay\CoreBundle\LocalData\LocalDataAwareTrait;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ApiResource(
-    shortName: 'BaseCourseDate',
+    shortName: 'BaseCourseEvent',
     types: ['https://schema.org/DateTimeImmutable'],
     operations: [
         new Get(
-            uriTemplate: '/base/course-dates/{identifier}',
+            uriTemplate: '/base/course-events/{identifier}',
             openapi: new Operation(
                 tags: ['BaseCourse'],
                 parameters: [
@@ -33,10 +32,10 @@ use Symfony\Component\Serializer\Annotation\Groups;
                     ),
                 ],
             ),
-            provider: CourseClassDataProvider::class
+            provider: CourseEventDataProvider::class
         ),
         new GetCollection(
-            uriTemplate: '/base/course-dates',
+            uriTemplate: '/base/course-events',
             openapi: new Operation(
                 tags: ['BaseCourse'],
                 parameters: [
@@ -56,27 +55,27 @@ use Symfony\Component\Serializer\Annotation\Groups;
                     ),
                 ]
             ),
-            provider: CourseClassDataProvider::class
+            provider: CourseEventDataProvider::class
         ),
     ],
     normalizationContext: [
-        'groups' => ['BaseCourseDate:output', 'LocalData:output'],
+        'groups' => ['BaseCourseEvent:output', 'LocalData:output'],
     ]
 )]
-class CourseClass implements LocalDataAwareInterface
+class CourseEvent implements LocalDataAwareInterface
 {
     use LocalDataAwareTrait;
 
-    #[Groups(['BaseCourseDate:output'])]
+    #[Groups(['BaseCourseEvent:output'])]
     private ?string $identifier = null;
 
-    #[Groups(['BaseCourseDate:output'])]
+    #[Groups(['BaseCourseEvent:output'])]
     private ?string $courseIdentifier = null;
 
-    #[Groups(['BaseCourseDate:output'])]
+    #[Groups(['BaseCourseEvent:output'])]
     private ?\DateTimeImmutable $startAt = null;
 
-    #[Groups(['BaseCourseDate:output'])]
+    #[Groups(['BaseCourseEvent:output'])]
     private ?\DateTimeImmutable $endAt = null;
 
     public function getIdentifier(): ?string
