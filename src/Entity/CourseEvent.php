@@ -47,14 +47,14 @@ use Symfony\Component\Serializer\Annotation\Groups;
                         schema: ['type' => 'string'],
                     ),
                     new Parameter(
-                        name: 'courseIdentifier',
+                        name: CourseEvent::COURSE_IDENTIFIER_QUERY_PARAMETER,
                         in: 'query',
                         description: 'The course to get the events for',
                         required: true,
                         schema: ['type' => 'string'],
                     ),
                     new Parameter(
-                        name: 'typeKey',
+                        name: CourseEvent::TYPE_KEY_QUERY_PARAMETER,
                         in: 'query',
                         description: 'The type of events to get',
                         required: false,
@@ -77,6 +77,7 @@ class CourseEvent implements LocalDataAwareInterface
     use LocalDataAwareTrait;
 
     public const COURSE_IDENTIFIER_QUERY_PARAMETER = 'courseIdentifier';
+    public const TYPE_KEY_QUERY_PARAMETER = 'typeKey';
 
     public const CLASS_TYPE_KEY = 'CLASS';
     public const EXAM_TYPE_KEY = 'EXAM';
