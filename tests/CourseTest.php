@@ -9,8 +9,10 @@ use Dbp\Relay\BaseCourseBundle\DataProvider\CourseEventDataProvider;
 use Dbp\Relay\BaseCourseBundle\Entity\Course;
 use Dbp\Relay\BaseCourseBundle\Entity\CourseEvent;
 use Dbp\Relay\BaseCourseBundle\Service\DummyCourseProvider;
+use Dbp\Relay\CoreBundle\Exception\ApiError;
 use Dbp\Relay\CoreBundle\TestUtils\DataProviderTester;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\HttpFoundation\Response;
 
 class CourseTest extends TestCase
 {
@@ -61,10 +63,21 @@ class CourseTest extends TestCase
 
     public function testGetGetCourseEvents(): void
     {
-        $courseDates = $this->courseDateDataProviderTester->getPage(1, 10);
+        $courseDates = $this->courseDateDataProviderTester->getPage(1, 10, [
+            CourseEvent::COURSE_IDENTIFIER_QUERY_PARAMETER => 'foo',
+        ]);
         $this->assertIsArray($courseDates);
         $this->assertCount(1, $courseDates);
         $this->assertInstanceOf(CourseEvent::class, $courseDates[0]);
+    }
+
+    public function testGetGetCourseEventsCourseIdentifierMissing(): void
+    {
+        try {
+            $this->courseDateDataProviderTester->getPage(1, 10);
+        } catch (ApiError $apiError) {
+            $this->assertEquals(Response::HTTP_BAD_REQUEST, $apiError->getStatusCode());
+        }
     }
 
     public function testGetGetCourseEventsByCourseIdentifier(): void

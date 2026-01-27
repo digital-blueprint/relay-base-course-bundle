@@ -66,6 +66,8 @@ class CourseEvent implements LocalDataAwareInterface
 {
     use LocalDataAwareTrait;
 
+    public const COURSE_IDENTIFIER_QUERY_PARAMETER = 'courseIdentifier';
+
     #[Groups(['BaseCourseEvent:output'])]
     private ?string $identifier = null;
 

@@ -36,7 +36,7 @@ class ApiTest extends AbstractApiTest
     public function testGetCourseEventCollectionAuthenticated(): void
     {
         $this->testClient->setUpUser(userAttributes: ['MAY_READ' => true]);
-        $this->assertEquals(Response::HTTP_OK, $this->testClient->get('/base/course-events')->getStatusCode());
+        $this->assertEquals(Response::HTTP_OK, $this->testClient->get('/base/course-events?courseIdentifier=foo')->getStatusCode());
     }
 
     public function testGetCourseEventItemNotFound(): void

@@ -7,7 +7,9 @@ namespace Dbp\Relay\BaseCourseBundle\DataProvider;
 use Dbp\Relay\BaseCourseBundle\API\CourseProviderInterface;
 use Dbp\Relay\BaseCourseBundle\DependencyInjection\Configuration;
 use Dbp\Relay\BaseCourseBundle\Entity\CourseEvent;
+use Dbp\Relay\CoreBundle\Exception\ApiError;
 use Dbp\Relay\CoreBundle\Rest\AbstractDataProvider;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @extends AbstractDataProvider<CourseEvent>
@@ -26,12 +28,13 @@ class CourseEventDataProvider extends AbstractDataProvider
 
     protected function getPage(int $currentPageNumber, int $maxNumItemsPerPage, array $filters = [], array $options = []): array
     {
-        $knownFilters = [];
-        if ($courseIdentifier = $filters['courseIdentifier'] ?? null) {
-            $knownFilters['courseIdentifier'] = $courseIdentifier;
+        if (null === ($courseIdentifier = $filters[CourseEvent::COURSE_IDENTIFIER_QUERY_PARAMETER] ?? null)) {
+            throw new ApiError(Response::HTTP_BAD_REQUEST, 'Required query parameter \''.CourseEvent::COURSE_IDENTIFIER_QUERY_PARAMETER.'\' is missing.');
         }
 
-        return $this->courseProvider->getCourseEvents($currentPageNumber, $maxNumItemsPerPage, $knownFilters, $options);
+        return $this->courseProvider->getCourseEvents($currentPageNumber, $maxNumItemsPerPage, [
+            CourseEvent::COURSE_IDENTIFIER_QUERY_PARAMETER => $courseIdentifier,
+        ], $options);
     }
 
     protected function isCurrentUserGrantedOperationAccess(int $operation): bool
