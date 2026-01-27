@@ -49,9 +49,19 @@ use Symfony\Component\Serializer\Annotation\Groups;
                     new Parameter(
                         name: 'courseIdentifier',
                         in: 'query',
-                        description: 'The course to get the dates for',
-                        required: false,
+                        description: 'The course to get the events for',
+                        required: true,
                         schema: ['type' => 'string'],
+                    ),
+                    new Parameter(
+                        name: 'typeKey',
+                        in: 'query',
+                        description: 'The type of events to get',
+                        required: false,
+                        schema: [
+                            'type' => 'enum',
+                            'enum' => [CourseEvent::CLASS_TYPE_KEY, CourseEvent::EXAM_TYPE_KEY],
+                        ],
                     ),
                 ]
             ),
@@ -68,6 +78,9 @@ class CourseEvent implements LocalDataAwareInterface
 
     public const COURSE_IDENTIFIER_QUERY_PARAMETER = 'courseIdentifier';
 
+    public const CLASS_TYPE_KEY = 'CLASS';
+    public const EXAM_TYPE_KEY = 'EXAM';
+
     #[Groups(['BaseCourseEvent:output'])]
     private ?string $identifier = null;
 
@@ -79,6 +92,9 @@ class CourseEvent implements LocalDataAwareInterface
 
     #[Groups(['BaseCourseEvent:output'])]
     private ?\DateTimeImmutable $endAt = null;
+
+    #[Groups(['BaseCourseEvent:output'])]
+    private ?string $typeKey = null;
 
     public function getIdentifier(): ?string
     {
@@ -118,5 +134,15 @@ class CourseEvent implements LocalDataAwareInterface
     public function setEndAt(?\DateTimeImmutable $endAt): void
     {
         $this->endAt = $endAt;
+    }
+
+    public function getTypeKey(): ?string
+    {
+        return $this->typeKey;
+    }
+
+    public function setTypeKey(?string $typeKey): void
+    {
+        $this->typeKey = $typeKey;
     }
 }
