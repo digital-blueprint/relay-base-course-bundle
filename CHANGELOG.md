@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## v0.2.17
+
 - Add BaseCourseEvent entity to represent course events like lectures, exams, etc.
 
 ## v0.2.16
