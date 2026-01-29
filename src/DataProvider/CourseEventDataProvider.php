@@ -28,13 +28,18 @@ class CourseEventDataProvider extends AbstractDataProvider
 
     protected function getPage(int $currentPageNumber, int $maxNumItemsPerPage, array $filters = [], array $options = []): array
     {
-        if (null === ($courseIdentifier = $filters[CourseEvent::COURSE_IDENTIFIER_QUERY_PARAMETER] ?? null)) {
+        $queryParameters = [];
+        if (null !== ($courseIdentifier = $filters[CourseEvent::COURSE_IDENTIFIER_QUERY_PARAMETER] ?? null)) {
+            $queryParameters[CourseEvent::COURSE_IDENTIFIER_QUERY_PARAMETER] = $courseIdentifier;
+        } else {
             throw new ApiError(Response::HTTP_BAD_REQUEST, 'Required query parameter \''.CourseEvent::COURSE_IDENTIFIER_QUERY_PARAMETER.'\' is missing.');
         }
+        if (null !== ($typeKey = $filters[CourseEvent::TYPE_KEY_QUERY_PARAMETER] ?? null)) {
+            $queryParameters[CourseEvent::TYPE_KEY_QUERY_PARAMETER] = $typeKey;
+        }
 
-        return $this->courseProvider->getCourseEvents($currentPageNumber, $maxNumItemsPerPage, [
-            CourseEvent::COURSE_IDENTIFIER_QUERY_PARAMETER => $courseIdentifier,
-        ], $options);
+        return $this->courseProvider->getCourseEvents(
+            $currentPageNumber, $maxNumItemsPerPage, $queryParameters, $options);
     }
 
     protected function isCurrentUserGrantedOperationAccess(int $operation): bool

@@ -2,7 +2,7 @@
 
 ## Unreleased
 
-- Add CourseClass entity to represent a class, i.e., one specific instance of instruction within a course
+- Add BaseCourseEvent entity to represent course events like lectures, exams, etc.
 
 ## v0.2.16
 
