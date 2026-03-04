@@ -13,6 +13,8 @@ use Dbp\Relay\BaseCourseBundle\DataProvider\CourseEventDataProvider;
 use Dbp\Relay\CoreBundle\LocalData\LocalDataAwareInterface;
 use Dbp\Relay\CoreBundle\LocalData\LocalDataAwareTrait;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Attribute\Context;
+use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 
 #[ApiResource(
     shortName: 'BaseCourseEvent',
@@ -89,9 +91,11 @@ class CourseEvent implements LocalDataAwareInterface
     private ?string $courseIdentifier = null;
 
     #[Groups(['BaseCourseEvent:output'])]
+    #[Context(normalizationContext: [DateTimeNormalizer::TIMEZONE_KEY => 'UTC'])]
     private ?\DateTimeImmutable $startAt = null;
 
     #[Groups(['BaseCourseEvent:output'])]
+    #[Context(normalizationContext: [DateTimeNormalizer::TIMEZONE_KEY => 'UTC'])]
     private ?\DateTimeImmutable $endAt = null;
 
     #[Groups(['BaseCourseEvent:output'])]
