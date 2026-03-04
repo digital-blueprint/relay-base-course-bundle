@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+## v0.2.18
+
+- Drop support for Symfony 6.4
+- Always output UTC datetimes via the API
+
 ## v0.2.17
 
 - Add BaseCourseEvent entity to represent course events like lectures, exams, etc.
