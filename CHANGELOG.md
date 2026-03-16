@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+## v0.2.19
+
+- Update datetime output to include milliseconds and always use "Z" instead of a "+00:00"
+
 ## v0.2.18
 
 - Drop support for Symfony 6.4
