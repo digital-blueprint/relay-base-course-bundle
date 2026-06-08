@@ -17,7 +17,7 @@ interface CourseProviderInterface
      *
      * @throws ApiError
      */
-    public function getCourseById(string $identifier, array $options = []): ?Course;
+    public function getCourseById(string $identifier, array $options = []): Course;
 
     /**
      * @param array $options Available options:

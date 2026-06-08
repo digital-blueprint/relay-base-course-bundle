@@ -7,18 +7,20 @@ namespace Dbp\Relay\BaseCourseBundle\Service;
 use Dbp\Relay\BaseCourseBundle\API\CourseProviderInterface;
 use Dbp\Relay\BaseCourseBundle\Entity\Course;
 use Dbp\Relay\BaseCourseBundle\Entity\CourseEvent;
+use Dbp\Relay\CoreBundle\Exception\ApiError;
 
 class DummyCourseProvider implements CourseProviderInterface
 {
-    public function getCourseById(string $identifier, array $options = []): ?Course
+    public function getCourseById(string $identifier, array $options = []): Course
     {
-        $course = null;
-        if ($identifier !== '404') {
-            $course = new Course();
-            $course->setIdentifier($identifier);
-            $course->setCode('C0815');
-            $course->setName('Field Theory');
+        if ($identifier === '404') {
+            throw new ApiError(404);
         }
+
+        $course = new Course();
+        $course->setIdentifier($identifier);
+        $course->setCode('C0815');
+        $course->setName('Field Theory');
 
         return $course;
     }
