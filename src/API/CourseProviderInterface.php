@@ -41,5 +41,6 @@ interface CourseProviderInterface
      *
      * @throws ApiError
      */
-    public function getCourseEvents(int $currentPageNumber, int $maxNumItemsPerPage, array $filters = [], array $options = []): array;
+    public function getCourseEventsByCourseId(string $courseIdentifier,
+        int $currentPageNumber, int $maxNumItemsPerPage, array $filters = [], array $options = []): array;
 }

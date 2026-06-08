@@ -29,16 +29,14 @@ class CourseEventDataProvider extends AbstractDataProvider
     protected function getPage(int $currentPageNumber, int $maxNumItemsPerPage, array $filters = [], array $options = []): array
     {
         $queryParameters = [];
-        if (null !== ($courseIdentifier = $filters[CourseEvent::COURSE_IDENTIFIER_QUERY_PARAMETER] ?? null)) {
-            $queryParameters[CourseEvent::COURSE_IDENTIFIER_QUERY_PARAMETER] = $courseIdentifier;
-        } else {
+        if (null === ($courseIdentifier = $filters[CourseEvent::COURSE_IDENTIFIER_QUERY_PARAMETER] ?? null)) {
             throw new ApiError(Response::HTTP_BAD_REQUEST, 'Required query parameter \''.CourseEvent::COURSE_IDENTIFIER_QUERY_PARAMETER.'\' is missing.');
         }
         if (null !== ($typeKey = $filters[CourseEvent::TYPE_KEY_QUERY_PARAMETER] ?? null)) {
             $queryParameters[CourseEvent::TYPE_KEY_QUERY_PARAMETER] = $typeKey;
         }
 
-        return $this->courseProvider->getCourseEvents(
+        return $this->courseProvider->getCourseEventsByCourseId($courseIdentifier,
             $currentPageNumber, $maxNumItemsPerPage, $queryParameters, $options);
     }
 

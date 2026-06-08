@@ -38,10 +38,11 @@ class DummyCourseProvider implements CourseProviderInterface
         return $courseDate;
     }
 
-    public function getCourseEvents(int $currentPageNumber, int $maxNumItemsPerPage,
+    public function getCourseEventsByCourseId(string $courseIdentifier,
+        int $currentPageNumber, int $maxNumItemsPerPage,
         array $filters = [], array $options = []): array
     {
-        return [$this->getEvent('456', $filters['courseIdentifier'] ?? '123')];
+        return [$this->getEvent('456', $courseIdentifier)];
     }
 
     private function getEvent(string $identifier, string $courseIdentifier): CourseEvent

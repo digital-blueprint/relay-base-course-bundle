@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- CourseProviderInterface: add the required course identifier to the signature of getCourseEventsByCourseId()
+
 ## v0.2.19
 
 - Update datetime output to include milliseconds and always use "Z" instead of a "+00:00"
