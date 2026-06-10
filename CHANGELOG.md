@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## v0.2.20
+
 - CourseProviderInterface:getCourseById: change to nun-nullable return value
 - CourseProviderInterface: add the required course identifier to the signature of getCourseEventsByCourseId()
 
