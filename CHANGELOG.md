@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+## v0.2.21
+
+- Dependency updates
+
 ## v0.2.20
 
 - CourseProviderInterface:getCourseById: change to nun-nullable return value
