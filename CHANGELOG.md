@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+## v0.2.22
+
+- Support api-platform 5
+
 ## v0.2.21
 
 - Dependency updates
